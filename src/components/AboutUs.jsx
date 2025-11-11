@@ -22,20 +22,19 @@ const AboutUs = () => {
         <img
           src={about1Img}
           alt="About image 1"
-          className="w-full sm:w-3/4 md:w-full lg:w-1/2 rounded-3xl object-cover shadow-lg transform hover:scale-105 transition-all duration-300"
+          className="w-full sm:w-3/4 md:w-full lg:w-1/2 h-90 rounded-3xl object-cover shadow-lg transform hover:scale-105 transition-all duration-300"
         />
         <img
           src={about2Img}
           alt="About image 2"
-          className="w-full sm:w-3/4 md:w-full lg:w-1/2 rounded-3xl object-cover shadow-lg transform hover:scale-105 transition-all duration-300"
+          className="w-full sm:w-3/4 md:w-full lg:w-1/2 h-90 rounded-3xl object-cover shadow-lg transform hover:scale-105 transition-all duration-300"
         />
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
         {/* Card 1 */}
         <div className="flex flex-col items-center md:items-start">
           <div
-            className="bg-[#108251] dark:bg-green-700 p-5 rounded-2xl mb-5 text-white w-fit transform transition-transform duration-500 
+            className="bg-[#108251] dark:bg-green-700 p-5 rounded-full mb-5 text-white w-fit transform transition-transform duration-500 
           hover:rotate-15"
           >
             <IoShieldCheckmarkOutline size={35} />
@@ -53,7 +52,7 @@ const AboutUs = () => {
         {/* Card 2 */}
         <div className="flex flex-col items-center md:items-start">
           <div
-            className="bg-[#108251] dark:bg-green-700 p-5 rounded-2xl mb-5 text-white w-fit transform transition-transform duration-500 
+            className="bg-[#108251] dark:bg-green-700 p-5 rounded-full mb-5 text-white w-fit transform transition-transform duration-500 
           hover:-rotate-15"
           >
             <BsPersonWorkspace size={35} />
@@ -70,7 +69,7 @@ const AboutUs = () => {
         {/* Card 3 */}
         <div className="flex flex-col items-center md:items-start">
           <div
-            className="bg-[#108251] dark:bg-green-700 p-5 rounded-2xl mb-5 text-white w-fit transform transition-transform duration-500
+            className="bg-[#108251] dark:bg-green-700 p-5 rounded-full mb-5 text-white w-fit transform transition-transform duration-500
           hover:rotate-15"
           >
             <FaUsersCog size={35} />

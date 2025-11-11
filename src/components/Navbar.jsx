@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import MyLink from "./MyLink";
 import logoImg from "../assets/logo.png";
 import { Link } from "react-router";
@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const { user, logOut } = useContext(AuthContext);
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -18,28 +19,27 @@ const Navbar = () => {
     setTheme(checked ? "dark" : "light");
   };
 
-  const links = (
+  const handleLogout = () => {
+    logOut()
+      .then(() => toast.error("You have been logged out"))
+      .catch((err) => console.log(err));
+  };
+
+  const publicLinks = (
     <>
-      <MyLink to={"/"}>Home</MyLink>
-      <MyLink to={"/allProperties"}>All Properties</MyLink>
-      <MyLink to={"/addProperties"}>Add Properties</MyLink>
-      <MyLink to={"/myProperties"}>My Properties</MyLink>
-      <MyLink to={"/myRatings"}>My Ratings</MyLink>
+      <MyLink to="/">Home</MyLink>
+      <MyLink to="/allProperties">All Properties</MyLink>
     </>
   );
 
-  const { user, logOut } = use(AuthContext);
-  console.log(user);
+  const protectedLinks = user && (
+    <>
+      <MyLink to="/addProperties">Add Properties</MyLink>
+      <MyLink to="/myProperties">My Properties</MyLink>
+      <MyLink to="/myRatings">My Ratings</MyLink>
+    </>
+  );
 
-  const handleLogout = () => {
-    logOut()
-      .then(() => {
-        toast.error("You have been logged out");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   return (
     <div className="navbar bg-base-100 shadow-lg py-4 pr-4 md:px-20 sticky top-0 z-50">
       <div className="navbar-start">
@@ -52,34 +52,37 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+              />
             </svg>
           </div>
           <ul
             tabIndex="-1"
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 shadow space-y-2 font-primary"
           >
-            {links}
+            {publicLinks}
+            {protectedLinks}
           </ul>
         </div>
         <div className="flex items-center gap-1">
           <img src={logoImg} alt="Logo image" className="w-10" />
-          <Link to={"/"} className="font-primary font-bold text-2xl">
+          <Link to="/" className="font-primary font-bold text-2xl">
             Home<span className="text-[#108251]">Nest</span>
           </Link>
         </div>
       </div>
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-1 font-primary">
-          {links}
+          {publicLinks}
+          {protectedLinks}
         </ul>
       </div>
+
       <div className="navbar-end space-x-2">
         {user ? (
           <div className="dropdown dropdown-end">
@@ -90,12 +93,11 @@ const Navbar = () => {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src={`${
-                    user
-                      ? user.photoURL
-                      : "https://img.icons8.com/?size=48&id=kDoeg22e5jUY&format=png"
-                  }`}
+                  alt="User Avatar"
+                  src={
+                    user.photoURL ||
+                    "https://img.icons8.com/?size=48&id=kDoeg22e5jUY&format=png"
+                  }
                 />
               </div>
             </div>
@@ -119,7 +121,7 @@ const Navbar = () => {
                   <input
                     onChange={(e) => handleTheme(e.target.checked)}
                     type="checkbox"
-                    defaultChecked={localStorage.getItem("theme") === "dark"}
+                    defaultChecked={theme === "dark"}
                     className="toggle toggle-sm"
                   />
                 </label>
@@ -136,24 +138,24 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <label className="flex justify-center text-center items-center gap-3 font-primary text-xs border rounded-full p-2">
+            <label className="flex justify-center text-center items-center gap-3 font-primary text-sm h-10 border-gray-500 rounded-full p-2 border-2">
               Change Theme
               <input
                 onChange={(e) => handleTheme(e.target.checked)}
                 type="checkbox"
-                defaultChecked={localStorage.getItem("theme") === "dark"}
-                className="toggle toggle-xs"
+                defaultChecked={theme === "dark"}
+                className="toggle toggle-xs text-gray-500 dark:text-white"
               />
             </label>
             <Link
-              to={"/login"}
-              className="btn btn-outline btn-accent rounded-full font-primary text-lg"
+              to="/login"
+              className="btn btn-outline btn-accent rounded-full font-primary border-2 text-lg"
             >
               Login
             </Link>
             <Link
-              to={"/register"}
-              className="btn btn-outline btn-info rounded-full font-primary text-lg"
+              to="/register"
+              className="btn btn-outline btn-info rounded-full font-primary border-2 text-lg"
             >
               SignUp
             </Link>

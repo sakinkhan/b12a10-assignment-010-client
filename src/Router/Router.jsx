@@ -9,6 +9,7 @@ import MyProperties from "../pages/MyProperties";
 import MyRatings from "../pages/MyRatings";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import PrivateRoute from "../provider/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -35,15 +36,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/addProperties",
-        element: <AddProperties></AddProperties>,
+        element: (
+          <PrivateRoute>
+            <AddProperties></AddProperties>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myProperties",
-        element: <MyProperties></MyProperties>,
+        element: (
+          <PrivateRoute>
+            <MyProperties></MyProperties>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myRatings",
-        element: <MyRatings></MyRatings>,
+        element: (
+          <PrivateRoute>
+            <MyRatings></MyRatings>
+          </PrivateRoute>
+        ),
       },
     ],
   },

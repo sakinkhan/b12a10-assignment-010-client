@@ -123,11 +123,13 @@ const FeaturedProperties = () => {
   ];
 
   return (
-    <section className="py-16 transition-colors duration-300  bg-green-50 dark:bg-gray-900">
+    <section className="py-20 transition-colors duration-300 bg-green-50 dark:bg-gray-900 px-10">
       <div className="mx-auto px-10">
-        <div className="flex justify-between items-center mb-12 px-10">
+        <div className="flex flex-col md:flex-row gap-5 justify-between items-center text-center md:text-left mb-12 px-15">
           <h2 className="text-5xl font-bold font-primary text-gray-900 dark:text-gray-100 leading-tight">
-            Discover Our Featured Properties Now
+            Discover Our Featured
+            <br />
+            Properties Now
           </h2>
           <button className="flex items-center rounded-full text-[16px] font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 btn btn-soft btn-success transition duration-300 hover:text-white font-primary">
             View All Properties
