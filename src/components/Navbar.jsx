@@ -29,6 +29,7 @@ const Navbar = () => {
   );
 
   const { user, logOut } = use(AuthContext);
+  console.log(user);
 
   const handleLogout = () => {
     logOut()
@@ -90,7 +91,11 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src={`${
+                    user
+                      ? user.photoURL
+                      : "https://img.icons8.com/?size=48&id=kDoeg22e5jUY&format=png"
+                  }`}
                 />
               </div>
             </div>
@@ -99,13 +104,17 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-45 p-2 shadow font-primary space-y-2"
             >
               <li>
-                <a className="justify-between">DisplayName</a>
+                <a className="justify-between text-[16px]">
+                  {user?.displayName}
+                </a>
               </li>
               <li>
-                <a className="justify-between">Email</a>
+                <a className="justify-between text-[14px]">
+                  Email: {user?.email}
+                </a>
               </li>
               <li>
-                <label className="flex justify-between items-center gap-3 font-primary">
+                <label className="flex justify-between items-center gap-3 font-primary text-[14px]">
                   Change Theme
                   <input
                     onChange={(e) => handleTheme(e.target.checked)}

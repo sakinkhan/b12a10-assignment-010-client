@@ -10,9 +10,12 @@ const SearchBar = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
           <select className="select select-bordered w-full">
             <option>Any Location</option>
-            <option>Sydney</option>
-            <option>Melbourne</option>
+            <option>Adelaide</option>
             <option>Brisbane</option>
+            <option>Canberra</option>
+            <option>Melbourne</option>
+            <option>Perth</option>
+            <option>Sydney</option>
           </select>
 
           <select className="select select-bordered w-full">
@@ -20,6 +23,7 @@ const SearchBar = () => {
             <option>Apartment</option>
             <option>House</option>
             <option>Unit</option>
+            <option>Land</option>
           </select>
 
           <select className="select select-bordered w-full">
@@ -29,7 +33,7 @@ const SearchBar = () => {
           </select>
           <button
             type="submit"
-            className="hidden md:block btn bg-[#108251] hover:bg-[#0d6b43] text-white font-semibold w-full"
+            className="hidden md:block btn bg-[#108251] hover:bg-[#48e9a8] hover:border-0 hover:text-black duration-200 text-white font-semibold w-full"
           >
             SEARCH
           </button>
@@ -50,9 +54,10 @@ const SearchBar = () => {
         >
           <select className="select select-bordered w-full">
             <option>Beds</option>
-            <option>1+</option>
-            <option>2+</option>
-            <option>3+</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5/5+</option>
           </select>
 
           <select className="select select-bordered w-full">

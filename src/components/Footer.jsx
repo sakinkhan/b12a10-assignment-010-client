@@ -27,31 +27,30 @@ const Footer = () => {
       <nav>
         <h6 className="footer-title">Company</h6>
         <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
+        <a className="link link-hover">Contact us</a>
+        <a className="link link-hover">Career</a>
       </nav>
       <nav>
         <h6 className="footer-title">Legal</h6>
-        <a className="link link-hover">Terms of use</a>
+        <a className="link link-hover">Terms & Conditions</a>
         <a className="link link-hover">Privacy policy</a>
         <a className="link link-hover">Cookie policy</a>
       </nav>
       <nav>
         <h6 className="footer-title">Social</h6>
         <div className="flex flex-row items-center gap-4">
-          <a>
-            <p className="text-xl">
+          <a className="">
+            <p className="text-xl cursor-pointer hover:scale-110">
               <FaXTwitter />
             </p>
           </a>
           <a>
-            <p className="text-2xl">
+            <p className="text-2xl cursor-pointer hover:scale-110">
               <FaYoutube />
             </p>
           </a>
           <a>
-            <p className="text-xl">
+            <p className="text-xl cursor-pointer hover:scale-110">
               <FaFacebookF />
             </p>
           </a>
