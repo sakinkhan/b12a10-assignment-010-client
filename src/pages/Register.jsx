@@ -74,7 +74,7 @@ const Register = () => {
     <div>
       {user ? (
         <div>
-          <p className="font-primary text-5xl text-center font-bold py-50 text-secondary">
+          <p className="font-primary text-5xl text-center font-bold py-50 text-[#108251]">
             You are already Logged in!
           </p>
           <title>HomeNest - SignUp</title>
@@ -83,7 +83,7 @@ const Register = () => {
         <div className="hero bg-base-200 min-h-screen">
           <title>HomeNest - SignUp</title>
           <div className="hero-content flex-col">
-            <div className="card bg-blue-50 w-full shrink-0 shadow-2xl py-5 px-5">
+            <div className="card bg-blue-100 w-full shrink-0 shadow-2xl py-5 px-5">
               <h1 className="text-3xl font-bold font-primary text-center text-black">
                 SignUp now!
               </h1>
@@ -91,7 +91,7 @@ const Register = () => {
                 <form onSubmit={handleRegister}>
                   <fieldset className="fieldset">
                     {/* Name */}
-                    <label className="label text-[16px] ">Name</label>
+                    <label className="label text-[16px] text-black">Name</label>
                     <input
                       name="name"
                       type="text"
@@ -100,7 +100,9 @@ const Register = () => {
                       required
                     />
                     {/* Email */}
-                    <label className="label text-[16px]">Email</label>
+                    <label className="label text-[16px] text-black">
+                      Email
+                    </label>
                     <input
                       name="email"
                       type="email"
@@ -109,7 +111,9 @@ const Register = () => {
                       required
                     />
                     {/* Photo URL */}
-                    <label className="label text-[16px]">Photo URL</label>
+                    <label className="label text-[16px] text-black">
+                      Photo URL
+                    </label>
                     <input
                       name="photo"
                       type="text"
@@ -118,7 +122,9 @@ const Register = () => {
                       required
                     />
                     {/* Password */}
-                    <label className="label text-[16px]">Password</label>
+                    <label className="label text-[16px] text-black">
+                      Password
+                    </label>
                     <div className="relative">
                       <input
                         name="password"
@@ -139,8 +145,12 @@ const Register = () => {
                       </button>
                     </div>
                     <div>
-                      <label className="label text-[14px]">
-                        <input type="checkbox" className="checkbox" required />
+                      <label className="label text-[14px] text-black">
+                        <input
+                          type="checkbox"
+                          className="checkbox text-black"
+                          required
+                        />
                         Accept Terms & Conditions
                       </label>
                     </div>
@@ -150,7 +160,7 @@ const Register = () => {
                     >
                       SignUp
                     </button>
-                    <p className="pt-5 font-semibold text-[16px] font-secondary">
+                    <p className="pt-5 font-semibold text-[16px] font-secondary text-black">
                       Already have an account? Please{" "}
                       <Link
                         to={"/login"}

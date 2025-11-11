@@ -72,7 +72,9 @@ const Login = () => {
                 <form onSubmit={handleLogin}>
                   <fieldset className="fieldset">
                     {/* Email */}
-                    <label className="label text-[16px]">Email</label>
+                    <label className="label text-[16px] text-black">
+                      Email
+                    </label>
                     <input
                       name="email"
                       type="email"
@@ -81,7 +83,9 @@ const Login = () => {
                       placeholder="Email"
                     />
                     {/* Password */}
-                    <label className="label text-[16px]">Password</label>
+                    <label className="label text-[16px] text-black">
+                      Password
+                    </label>
                     <div className="relative">
                       <input
                         name="password"
@@ -101,7 +105,7 @@ const Login = () => {
                       </button>
                     </div>
                     <div onClick={handleForgetPassword}>
-                      <a className="link link-hover text-[16px] ">
+                      <a className="link link-hover text-[16px] text-black">
                         Forgot password?
                       </a>
                     </div>
@@ -111,11 +115,11 @@ const Login = () => {
                     >
                       Login
                     </button>
-                    <p className="py-3 font-semibold text-[16px]">
+                    <p className="py-3 font-semibold text-[16px] text-black">
                       Don't have an account? Please{" "}
                       <Link
                         to={"/register"}
-                        className="text-[#108251] hover:underline"
+                        className="text-blue-500 hover:underline"
                       >
                         Register
                       </Link>
