@@ -16,7 +16,7 @@ const Hero = () => {
         <p className="btn btn-success rounded-full cursor-default font-secondary">
           Welcome to HomeNest
         </p>
-        <h2 className="font-primary text-3xl md:text-5xl font-black text-white max-w-3xl">
+        <h2 className="font-primary text-3xl md:text-5xl font-black text-white max-w-3xl pb-5">
           Find your <span className="text-[#48e9a8]">dream</span> home in the
           best location
         </h2>

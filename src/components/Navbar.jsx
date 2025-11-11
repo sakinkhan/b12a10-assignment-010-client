@@ -125,7 +125,10 @@ const Navbar = () => {
                 </label>
               </li>
               <li>
-                <button onClick={handleLogout} className="btn btn-error p-2">
+                <button
+                  onClick={handleLogout}
+                  className="btn btn-error p-2 rounded-full text-sm"
+                >
                   Logout
                 </button>
               </li>
@@ -133,15 +136,24 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex items-center gap-2">
+            <label className="flex justify-center text-center items-center gap-3 font-primary text-xs border rounded-full p-2">
+              Change Theme
+              <input
+                onChange={(e) => handleTheme(e.target.checked)}
+                type="checkbox"
+                defaultChecked={localStorage.getItem("theme") === "dark"}
+                className="toggle toggle-xs"
+              />
+            </label>
             <Link
               to={"/login"}
-              className="btn btn-outline btn-accent font-primary text-lg"
+              className="btn btn-outline btn-accent rounded-full font-primary text-lg"
             >
               Login
             </Link>
             <Link
               to={"/register"}
-              className="btn btn-outline btn-info font-primary text-lg"
+              className="btn btn-outline btn-info rounded-full font-primary text-lg"
             >
               SignUp
             </Link>

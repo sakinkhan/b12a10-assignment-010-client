@@ -126,10 +126,10 @@ const FeaturedProperties = () => {
     <section className="py-16 transition-colors duration-300  bg-base-300 dark:bg-gray-900">
       <div className="mx-auto px-10">
         <div className="flex justify-between items-center mb-12 px-10">
-          <h2 className="text-4xl font-bold font-primary text-gray-900 dark:text-gray-100 leading-tight">
+          <h2 className="text-5xl font-bold font-primary text-gray-900 dark:text-gray-100 leading-tight">
             Discover Our Featured Properties Now
           </h2>
-          <button className="flex items-center text-sm font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 btn btn-soft btn-success transition duration-300 hover:text-white font-primary">
+          <button className="flex items-center rounded-full text-[16px] font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 btn btn-soft btn-success transition duration-300 hover:text-white font-primary">
             View All Properties
             <span className="text-base">↗</span>
           </button>
@@ -207,7 +207,7 @@ const FeaturedProperties = () => {
                           {p.price}
                         </p>
                       </div>
-                      <button className="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-semibold px-6 py-2 rounded-md transition duration-300 hover:bg-[#108251] dark:hover:bg-[#108251] dark:hover:text-white">
+                      <button className="bg-gray-900 rounded-full dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-semibold px-6 py-2 transition duration-300 hover:bg-[#108251] dark:hover:bg-[#108251] dark:hover:text-white cursor-pointer">
                         View Details
                       </button>
                     </div>

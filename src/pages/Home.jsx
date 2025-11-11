@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import LatestProperties from "../components/FeaturedProperties/FeaturedProperties";
 import FeaturedProperties from "../components/FeaturedProperties/FeaturedProperties";
 import WhyChooseUs from "../components/WhyChooseUs";
+import MeetAgents from "../components/MeetAgents/MeetAgents";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Hero></Hero>
       <FeaturedProperties></FeaturedProperties>
       <WhyChooseUs></WhyChooseUs>
+      <MeetAgents></MeetAgents>
     </div>
   );
 };
