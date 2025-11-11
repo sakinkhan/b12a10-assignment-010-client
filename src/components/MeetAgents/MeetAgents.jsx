@@ -54,7 +54,7 @@ const MeetAgents = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-base-200 dark:bg-gray-900 text-base-content dark:text-gray-200 transition-colors duration-300 px-4 sm:px-20">
+    <section className="py-16 sm:py-24 bg-green-50 dark:bg-gray-900 text-base-content dark:text-gray-200 transition-colors duration-300 px-4 sm:px-20">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-8">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 flex flex-col sm:flex-row justify-center items-center font-primary">
@@ -66,7 +66,7 @@ const MeetAgents = () => {
             Unmatched Local Knowledge
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-10 gap-x-4 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-10 gap-x-4 mb-12 w-50 md:w-full mx-auto">
           {agentsData.map((agent) => (
             <AgentCard key={agent.id} {...agent} />
           ))}

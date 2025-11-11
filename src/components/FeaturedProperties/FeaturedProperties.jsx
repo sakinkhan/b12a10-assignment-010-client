@@ -123,7 +123,7 @@ const FeaturedProperties = () => {
   ];
 
   return (
-    <section className="py-16 transition-colors duration-300  bg-base-300 dark:bg-gray-900">
+    <section className="py-16 transition-colors duration-300  bg-green-50 dark:bg-gray-900">
       <div className="mx-auto px-10">
         <div className="flex justify-between items-center mb-12 px-10">
           <h2 className="text-5xl font-bold font-primary text-gray-900 dark:text-gray-100 leading-tight">

@@ -5,6 +5,8 @@ import LatestProperties from "../components/FeaturedProperties/FeaturedPropertie
 import FeaturedProperties from "../components/FeaturedProperties/FeaturedProperties";
 import WhyChooseUs from "../components/WhyChooseUs";
 import MeetAgents from "../components/MeetAgents/MeetAgents";
+import SimpleSteps from "../components/SimpleSteps";
+import AboutUs from "../components/AboutUs";
 
 const Home = () => {
   return (
@@ -14,6 +16,8 @@ const Home = () => {
       <FeaturedProperties></FeaturedProperties>
       <WhyChooseUs></WhyChooseUs>
       <MeetAgents></MeetAgents>
+      <SimpleSteps></SimpleSteps>
+      <AboutUs></AboutUs>
     </div>
   );
 };
