@@ -164,7 +164,7 @@ const Register = () => {
                       Already have an account? Please{" "}
                       <Link
                         to={"/login"}
-                        className="text-[#108251] hover:underline"
+                        className="text-blue-500 hover:underline"
                       >
                         Login
                       </Link>
@@ -203,7 +203,7 @@ const Register = () => {
                             ></path>
                           </g>
                         </svg>
-                        Register using Google
+                        SignUp using Google
                       </button>
                     </div>
                   </fieldset>

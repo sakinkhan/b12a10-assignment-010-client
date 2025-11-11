@@ -3,7 +3,7 @@ import HomeLayout from "../layouts/HomeLayout";
 import Home from "../pages/Home";
 import ErrorPage from "../pages/ErrorPage";
 import Loading from "../components/Loading";
-import AllProperties from "../pages/AllProperties";
+import AllProperties from "../pages/AllProperties/AllProperties";
 import AddProperties from "../pages/AddProperties";
 import MyProperties from "../pages/MyProperties";
 import MyRatings from "../pages/MyRatings";

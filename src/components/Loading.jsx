@@ -2,7 +2,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="flex flex-col items-center justify-center py-50">
+    <div className="flex flex-col items-center justify-center py-80">
       <p className="font-primary text-4xl font-extrabold text-[#108251] ml-7">
         L<span className="loading loading-spinner text-error"></span>
         ading

@@ -9,25 +9,29 @@ import { BiArea } from "react-icons/bi";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import "./FeaturedProperties.css";
+import { TbFileDescription } from "react-icons/tb";
 
 const FeaturedProperties = () => {
   const properties = [
     {
       id: 1,
-      title: "Maple Ridge Apartments",
-      address: "382 Blue Sky Boulevard, Oakwood Residences, CO 80202",
+      propertyName: "Maple Ridge Apartments",
+      location: "382 Blue Sky Boulevard, Oakwood Residences, CO 80202",
       price: "$85,000",
       beds: 5,
       baths: 4,
       area: "1600 Sqft",
       image:
-        "https://images.unsplash.com/photo-1580587771525-78b9dba3825b?q=80&w=2070&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
       tag: "For Sale",
+      category: "Apartment",
+      shortDescription:
+        "Spacious apartments with modern amenities in a prime location.",
     },
     {
       id: 2,
-      title: "Lakeside Manor",
-      address: "4345 Maplewood Drive, Evergreen Estates, CA 90210",
+      propertyName: "Lakeside Manor",
+      location: "4345 Maplewood Drive, Evergreen Estates, CA 90210",
       price: "$50,000",
       beds: 3,
       baths: 3,
@@ -35,11 +39,14 @@ const FeaturedProperties = () => {
       image:
         "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070&auto=format&fit=crop",
       tag: "For Sale",
+      category: "House",
+      shortDescription:
+        "Charming lakeside home offering peaceful surroundings and comfort.",
     },
     {
       id: 3,
-      title: "Golden Meadows",
-      address: "4345 Maplewood Drive, Evergreen Estates, CA 90210",
+      propertyName: "Golden Meadows",
+      location: "4345 Maplewood Drive, Evergreen Estates, CA 90210",
       price: "$50,000",
       beds: 3,
       baths: 3,
@@ -47,11 +54,14 @@ const FeaturedProperties = () => {
       image:
         "https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?q=80&w=2070&auto=format&fit=crop",
       tag: "For Sale",
+      category: "Unit",
+      shortDescription:
+        "Elegant property surrounded by lush greenery and serene views.",
     },
     {
       id: 4,
-      title: "Villa In Oglesby Ave",
-      address: "1035 Oglesby Ave, Chicago, IL 60617",
+      propertyName: "Villa In Oglesby Ave",
+      location: "1035 Oglesby Ave, Chicago, IL 60617",
       price: "$130,000 /month",
       beds: 4,
       baths: 3,
@@ -59,66 +69,83 @@ const FeaturedProperties = () => {
       image:
         "https://images.unsplash.com/photo-1605146768851-eda79da39897?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
       tag: "For Rent",
+      category: "House",
+      shortDescription:
+        "Modern villa with stylish interiors and convenient city access.",
     },
     {
       id: 5,
-      title: "Modern Loft",
-      address: "42 Wallaby Way, Sydney, NSW 2000",
-      price: "$95,000 /month",
+      propertyName: "Modern Loft",
+      location: "42 Wallaby Way, Sydney, NSW 2000",
+      price: "$5,000 /month",
       beds: 2,
       baths: 2,
       area: "900 sq ft",
       image:
         "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
       tag: "For Rent",
+      category: "Apartment",
+      shortDescription:
+        "Contemporary loft with open spaces and city skyline views.",
     },
     {
       id: 6,
-      title: "Modern Loft",
-      address: "42 Wallaby Way, Sydney, NSW 2000",
-      price: "$95,000 /month",
-      beds: 2,
+      propertyName: "Urban Retreat",
+      location: "55 King Street, Melbourne, VIC 3000",
+      price: "$8,000 /month",
+      beds: 3,
       baths: 2,
-      area: "900 sq ft",
+      area: "1100 sq ft",
       image:
         "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
       tag: "For Rent",
+      category: "Unit",
+      shortDescription:
+        "Cozy urban home located near cafes, parks, and transport.",
     },
     {
       id: 7,
-      title: "Modern Loft",
-      address: "42 Wallaby Way, Sydney, NSW 2000",
-      price: "$95,000 /month",
-      beds: 2,
-      baths: 2,
-      area: "900 sq ft",
+      propertyName: "Sunset Villas",
+      location: "12 Palm Drive, Gold Coast, QLD 4217",
+      price: "$50,000 /month",
+      beds: 4,
+      baths: 3,
+      area: "1300 sq ft",
       image:
         "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
       tag: "For Rent",
+      category: "House",
+      shortDescription:
+        "Stylish villa with spacious interiors and sunset views.",
     },
     {
       id: 8,
-      title: "Modern Loft",
-      address: "42 Wallaby Way, Sydney, NSW 2000",
-      price: "$95,000 /month",
+      propertyName: "Cozy Cottage",
+      location: "99 Willow Lane, Hobart, TAS 7000",
+      price: "$7,000 /month",
       beds: 2,
-      baths: 2,
-      area: "900 sq ft",
+      baths: 1,
+      area: "700 sq ft",
       image:
         "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
       tag: "For Rent",
+      category: "Land",
+      shortDescription:
+        "Charming cottage perfect for small families or couples.",
     },
     {
       id: 9,
-      title: "Modern Loft",
-      address: "42 Wallaby Way, Sydney, NSW 2000",
-      price: "$95,000 /month",
-      beds: 2,
-      baths: 2,
-      area: "900 sq ft",
+      propertyName: "Seaside Escape",
+      location: "88 Ocean Drive, Byron Bay, NSW 2481",
+      price: "$1,000 /month",
+      beds: 5,
+      baths: 4,
+      area: "2000 sq ft",
       image:
         "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
       tag: "For Rent",
+      category: "Apartment",
+      shortDescription: "Luxury beachfront property with stunning ocean views.",
     },
   ];
 
@@ -127,9 +154,9 @@ const FeaturedProperties = () => {
       <div className="mx-auto px-10">
         <div className="flex flex-col md:flex-row gap-5 justify-between items-center text-center md:text-left mb-12 px-15">
           <h2 className="text-5xl font-bold font-primary text-gray-900 dark:text-gray-100 leading-tight">
-            Discover Our Featured
+            Discover Our
             <br />
-            Properties Now
+            <span className="text-[#108251]">Featured Properties</span> Now
           </h2>
           <button className="flex items-center rounded-full text-[16px] font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 btn btn-soft btn-success transition duration-300 hover:text-white font-primary">
             View All Properties
@@ -164,7 +191,7 @@ const FeaturedProperties = () => {
           >
             {properties.map((p) => (
               <SwiperSlide key={p.id}>
-                <div className="group bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 transition-shadow duration-300 hover:shadow-xl w-full h-[520px] flex flex-col">
+                <div className="group bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 transition-shadow duration-300 hover:shadow-xl w-full h-[570px] flex flex-col">
                   {/* Image */}
                   <div className="relative h-64 w-full shrink-0">
                     <img
@@ -199,19 +226,30 @@ const FeaturedProperties = () => {
                     <div className="flex flex-col flex-1 justify-between">
                       <div>
                         <h3 className="text-2xl font-bold mb-1 text-gray-900 dark:text-gray-100 font-primary">
-                          {p.title}
+                          {p.propertyName}
                         </h3>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 flex items-center">
-                          <IoLocationSharp className="mr-1 text-base text-gray-400 dark:text-gray-300" />{" "}
-                          {p.address}
+                        <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 flex items-start">
+                          <IoLocationSharp className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />{" "}
+                          {p.location}
                         </p>
-                        <p className="text-[#108251] text-xl font-bold mb-4 font-secondary">
-                          {p.price}
+                        <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 flex items-start">
+                          <TbFileDescription className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />{" "}
+                          {p.shortDescription}
                         </p>
                       </div>
-                      <button className="bg-gray-900 rounded-full dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-semibold px-6 py-2 transition duration-300 hover:bg-[#108251] dark:hover:bg-[#108251] dark:hover:text-white cursor-pointer">
-                        View Details
-                      </button>
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <p className="text-[#108251] dark:text-[#60e0a9] text-2xl font-bold mb-4 font-secondary">
+                            {p.price}
+                          </p>
+                          <p className="mb-4 font-secondary btn btn-outline btn-success rounded-full h-7 cursor-default">
+                            {p.category}
+                          </p>
+                        </div>
+                        <button className="bg-gray-900 rounded-full dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-semibold px-6 py-2 transition duration-300 hover:bg-[#108251] dark:hover:bg-[#108251] dark:hover:text-white cursor-pointer w-full">
+                          View Details
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
