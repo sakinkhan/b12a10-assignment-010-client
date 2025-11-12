@@ -31,7 +31,7 @@ const Hero = () => {
         modules={[Autoplay]}
         slidesPerView={1}
         loop
-        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         className="h-[650px] md:h-[700px] lg:h-[750px]"
       >

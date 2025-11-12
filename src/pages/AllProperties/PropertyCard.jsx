@@ -11,7 +11,7 @@ const PropertyCard = ({
   beds,
   baths,
   area,
-  image,
+  propertyImage,
   tag,
   category,
   shortDescription,
@@ -23,7 +23,7 @@ const PropertyCard = ({
         {/* 1. Image Section */}
         <figure className="relative w-full h-56 sm:h-64 md:h-full overflow-hidden lg:col-span-1">
           <img
-            src={image}
+            src={propertyImage}
             alt={propertyName}
             className="object-cover w-full h-70"
           />
