@@ -10,6 +10,7 @@ import MyRatings from "../pages/MyRatings";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "../provider/PrivateRoute";
+import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,18 @@ const router = createBrowserRouter([
         path: "/allProperties",
         loader: () => fetch("http://localhost:3000/allProperties"),
         element: <AllProperties></AllProperties>,
+        hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: "/propertyDetails/:id",
+        element: (
+          <PrivateRoute>
+            <PropertyDetails></PropertyDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/properties/${params.id}`),
+        hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "/addProperties",

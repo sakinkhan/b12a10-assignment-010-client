@@ -10,6 +10,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import "./FeaturedProperties.css";
 import { TbFileDescription } from "react-icons/tb";
+import { Link } from "react-router";
 
 const FeaturedProperties = () => {
   const properties = [
@@ -158,10 +159,13 @@ const FeaturedProperties = () => {
             Discover Our <br />
             <span className="text-[#108251]">Featured Properties</span> Now
           </h2>
-          <button className="mt-3 md:mt-0 flex items-center justify-center rounded-full text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 btn btn-soft btn-success transition duration-300 hover:text-white font-primary">
+          <Link
+            to={"/allProperties"}
+            className="mt-3 md:mt-0 flex items-center justify-center rounded-full text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 btn btn-soft btn-success transition duration-300 hover:text-white font-primary"
+          >
             View All Properties
             <span className="ml-2 text-base">↗</span>
-          </button>
+          </Link>
         </div>
 
         <div className="relative flex items-center px-5">

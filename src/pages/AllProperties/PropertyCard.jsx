@@ -2,9 +2,10 @@ import React from "react";
 import { BiArea } from "react-icons/bi";
 import { FaBath, FaBed } from "react-icons/fa6";
 import { IoLocationSharp } from "react-icons/io5";
-import { TbFileDescription } from "react-icons/tb";
+import { Link } from "react-router";
 
 const PropertyCard = ({
+  _id,
   propertyName,
   location,
   price,
@@ -14,8 +15,18 @@ const PropertyCard = ({
   propertyImage,
   tag,
   category,
-  shortDescription,
+  userName,
+  description,
 }) => {
+  // Truncate description to 120 characters
+  const truncateDescription = (text, limit) => {
+    if (!text) return "";
+    return text.length > limit ? text.slice(0, limit) : text;
+  };
+
+  const shortDescription = truncateDescription(description, 120);
+  const isTruncated = description && description.length > 120;
+
   return (
     <div className="card bg-base-100 shadow-xl border border-base-200 overflow-hidden mb-6 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
       {/* Outer Grid for Responsiveness */}
@@ -45,18 +56,34 @@ const PropertyCard = ({
               {location}
             </div>
 
-            {/* Description */}
+            {/* Description with inline "Read More" */}
+            <p className="text-sm text-base-content/80 mb-3 font-secondary">
+              {isTruncated ? (
+                <>
+                  {shortDescription}
+                  <span>... </span>
+                  <Link
+                    to={`/propertyDetails/${_id}`}
+                    className="text-[#108251] hover:underline font-semibold"
+                  >
+                    Read More
+                  </Link>
+                </>
+              ) : (
+                description
+              )}
+            </p>
+
+            {/* Posted By */}
             <p className="text-sm text-base-content/80 mb-3 flex items-start font-secondary">
-              <TbFileDescription className="mt-0.5 mr-1 text-gray-400" />
-              {shortDescription}
+              <span className="font-semibold mr-1">Posted By:</span> {userName}
             </p>
           </div>
 
           <div>
-            <p className="mb-4 btn w-fit btn-outline btn-success rounded-full h-7 hover:text-white cursor-default text-sm font-secondary">
+            <p className="mb-4 btn w-fit btn-outline btn-success rounded-full h-7 hover:text-black cursor-default text-sm font-secondary">
               {category}
             </p>
-
             {/* Property Specs */}
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium font-secondary">
               <div className="flex items-center">
@@ -69,7 +96,7 @@ const PropertyCard = ({
               </div>
               <div className="flex items-center">
                 <BiArea className="mr-2 text-gray-700 dark:text-gray-200" />{" "}
-                {area}
+                {area} m²
               </div>
             </div>
           </div>
@@ -77,12 +104,17 @@ const PropertyCard = ({
 
         {/* 3. Pricing & Button Section */}
         <div className="p-6 md:col-span-2 lg:col-span-1 lg:p-8 flex flex-col justify-between items-center lg:items-end border-t md:border-t-0 lg:border-l border-base-200 bg-base-200">
-          <div className="mb-6 text-3xl lg:text-4xl font-extrabold text-success font-secondary text-center w-full">
-            {price}
+          <div className="mb-6 text-2xl lg:text-3xl font-extrabold text-[#108251] dark:text-success font-secondary text-center w-full">
+            {tag === "For Sale"
+              ? `$${price.toLocaleString()}`
+              : `$${price}/Week`}
           </div>
-          <button className="btn btn-success w-full md:w-[50%] lg:w-full hover:text-white font-primary">
-            View Details
-          </button>
+          <Link
+            to={`/propertyDetails/${_id}`}
+            className="btn btn-success w-full rounded-full md:w-[50%] lg:w-full hover:text-white hover:bg-[#108251] font-primary"
+          >
+            See Details
+          </Link>
         </div>
       </div>
     </div>
