@@ -150,53 +150,50 @@ const FeaturedProperties = () => {
   ];
 
   return (
-    <section className="py-20 transition-colors duration-300 bg-green-50 dark:bg-gray-900 px-10">
-      <div className="mx-auto px-10">
-        <div className="flex flex-col md:flex-row gap-5 justify-between items-center text-center md:text-left mb-12 px-15">
-          <h2 className="text-5xl font-bold font-primary text-gray-900 dark:text-gray-100 leading-tight">
-            Discover Our
-            <br />
+    <section className="py-20 transition-colors duration-300 bg-green-50 dark:bg-gray-900 px-5 md:px-20">
+      <div className="mx-auto">
+        {/* Heading & Button */}
+        <div className="flex flex-col md:flex-row gap-5 justify-between items-center text-center md:text-left mb-12">
+          <h2 className="text-4xl sm:text-5xl font-bold font-primary text-gray-900 dark:text-gray-100 leading-tight">
+            Discover Our <br />
             <span className="text-[#108251]">Featured Properties</span> Now
           </h2>
-          <button className="flex items-center rounded-full text-[16px] font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 btn btn-soft btn-success transition duration-300 hover:text-white font-primary">
+          <button className="mt-3 md:mt-0 flex items-center justify-center rounded-full text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 btn btn-soft btn-success transition duration-300 hover:text-white font-primary">
             View All Properties
-            <span className="text-base">↗</span>
+            <span className="ml-2 text-base">↗</span>
           </button>
         </div>
 
-        <div className="relative flex items-center">
+        <div className="relative flex items-center px-5">
           {/* Previous Arrow */}
-          <div className="swiper-button-prev-custom absolute -left-10 z-20 text-[#108251] text-4xl cursor-pointer p-2 transition duration-300 hover:scale-110 ml-1 md:ml-5">
+          <div className="swiper-button-prev-custom absolute top-1/2 -translate-y-1/2 -left-4 md:-left-10 z-20 text-[#108251] text-3xl md:text-4xl cursor-pointer p-1 md:p-2 transition duration-300 hover:scale-110">
             <FaArrowLeft />
           </div>
 
           <Swiper
             modules={[Pagination, Navigation]}
-            pagination={{
-              el: ".custom-pagination-dots",
-              clickable: true,
-            }}
+            pagination={{ el: ".custom-pagination-dots", clickable: true }}
             navigation={{
               nextEl: ".swiper-button-next-custom",
               prevEl: ".swiper-button-prev-custom",
             }}
-            spaceBetween={30}
+            spaceBetween={20}
             slidesPerView={1}
             slidesPerGroup={1}
             breakpoints={{
               768: { slidesPerView: 2, slidesPerGroup: 2 },
               1024: { slidesPerView: 3, slidesPerGroup: 3 },
             }}
-            className="w-11/12"
+            className="w-full"
           >
             {properties.map((p) => (
               <SwiperSlide key={p.id}>
-                <div className="group bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 transition-shadow duration-300 hover:shadow-xl w-full h-[570px] flex flex-col">
+                <div className="group bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 transition-shadow duration-300 hover:shadow-xl w-full h-full lg:h-[600px] flex flex-col justify-between grow">
                   {/* Image */}
                   <div className="relative h-64 w-full shrink-0">
                     <img
                       src={p.image}
-                      alt={p.title}
+                      alt={p.propertyName}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-3 left-3 bg-[#108251] text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -209,15 +206,15 @@ const FeaturedProperties = () => {
                     {/* Features */}
                     <div className="flex justify-around items-center pb-4 border-b border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 mb-4">
                       <div className="flex items-center text-sm font-medium">
-                        <FaBed className="mr-2 text-base text-gray-700 dark:text-gray-200" />{" "}
+                        <FaBed className="mr-2 text-base text-gray-700 dark:text-gray-200" />
                         {p.beds} Bed
                       </div>
                       <div className="flex items-center text-sm font-medium">
-                        <FaBath className="mr-2 text-base text-gray-700 dark:text-gray-200" />{" "}
+                        <FaBath className="mr-2 text-base text-gray-700 dark:text-gray-200" />
                         {p.baths} Bath
                       </div>
                       <div className="flex items-center text-sm font-medium">
-                        <BiArea className="mr-2 text-base text-gray-700 dark:text-gray-200" />{" "}
+                        <BiArea className="mr-2 text-base text-gray-700 dark:text-gray-200" />
                         {p.area}
                       </div>
                     </div>
@@ -229,11 +226,11 @@ const FeaturedProperties = () => {
                           {p.propertyName}
                         </h3>
                         <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 flex items-start">
-                          <IoLocationSharp className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />{" "}
+                          <IoLocationSharp className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />
                           {p.location}
                         </p>
                         <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 flex items-start">
-                          <TbFileDescription className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />{" "}
+                          <TbFileDescription className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />
                           {p.shortDescription}
                         </p>
                       </div>
@@ -258,7 +255,7 @@ const FeaturedProperties = () => {
           </Swiper>
 
           {/* Next Arrow */}
-          <div className="swiper-button-next-custom absolute -right-10 z-20 text-[#108251] text-4xl cursor-pointer p-2 transition duration-300 hover:scale-110 mr-1 md:mr-5">
+          <div className="swiper-button-next-custom absolute top-1/2 -translate-y-1/2 -right-4 md:-right-10 z-20 text-[#108251] text-3xl md:text-4xl cursor-pointer p-1 md:p-2 transition duration-300 hover:scale-110">
             <FaArrowRight />
           </div>
         </div>

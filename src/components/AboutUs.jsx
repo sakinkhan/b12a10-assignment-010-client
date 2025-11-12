@@ -8,9 +8,9 @@ import { FaUsersCog } from "react-icons/fa";
 const AboutUs = () => {
   return (
     <section className="px-5 md:px-20 py-16 bg-green-50 dark:bg-gray-900 transition-colors duration-300">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-10">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-primary font-bold text-[#108251] dark:text-white leading-tight">
-          Get to Know Who We Aret
+      <div className="flex flex-col lg:flex-row justify-between items-center gap-8 mb-10">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-primary font-bold text-[#108251] dark:text-white leading-tight text-center lg:text-left">
+          Get to Know Who We Are
           <br />& What Drives Us
         </h1>
         <button className="flex items-center rounded-full text-[16px] font-semibold text-gray-700 dark:text-gray-200 border border-[#108251] px-4 py-2 transition duration-300 hover:bg-[#108251] hover:text-white font-primary">

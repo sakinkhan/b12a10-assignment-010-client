@@ -4,6 +4,7 @@ import logoImg from "../assets/logo.png";
 import { Link } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
+import { BsSunFill, BsMoonStarsFill } from "react-icons/bs";
 
 const Navbar = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -15,8 +16,8 @@ const Navbar = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const handleTheme = (checked) => {
-    setTheme(checked ? "dark" : "light");
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   const handleLogout = () => {
@@ -42,12 +43,14 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 shadow-lg py-4 pr-4 md:px-20 sticky top-0 z-50">
+      {/* Left: Logo + Dropdown Menu */}
       <div className="navbar-start">
+        {/* Mobile Menu */}
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -61,13 +64,15 @@ const Navbar = () => {
             </svg>
           </div>
           <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 shadow space-y-2 font-primary"
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 shadow space-y-2 font-primary"
           >
             {publicLinks}
             {protectedLinks}
           </ul>
         </div>
+
+        {/* Logo */}
         <div className="flex items-center gap-1">
           <img src={logoImg} alt="Logo image" className="w-10" />
           <Link to="/" className="font-primary font-bold text-2xl">
@@ -76,6 +81,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Center: Navigation (desktop only) */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-1 font-primary">
           {publicLinks}
@@ -83,7 +89,21 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="navbar-end space-x-2">
+      {/* Right: Theme, Login/Signup or Profile */}
+      <div className="navbar-end flex items-center gap-2">
+        {/* Theme toggle (visible everywhere) */}
+        <button
+          onClick={toggleTheme}
+          className="btn btn-ghost btn-circle text-lg"
+        >
+          {theme === "light" ? (
+            <BsMoonStarsFill className="text-gray-700" />
+          ) : (
+            <BsSunFill className="text-yellow-400" />
+          )}
+        </button>
+
+        {/* Logged-in user */}
         {user ? (
           <div className="dropdown dropdown-end">
             <div
@@ -102,34 +122,19 @@ const Navbar = () => {
               </div>
             </div>
             <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-45 p-2 shadow font-primary space-y-2"
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-48 p-2 shadow font-primary space-y-2"
             >
               <li>
-                <a className="justify-between text-[16px]">
-                  {user?.displayName}
-                </a>
+                <p className="font-semibold text-sm">{user?.displayName}</p>
               </li>
               <li>
-                <a className="justify-between text-[14px]">
-                  Email: {user?.email}
-                </a>
-              </li>
-              <li>
-                <label className="flex justify-between items-center gap-3 font-primary text-[14px]">
-                  Change Theme
-                  <input
-                    onChange={(e) => handleTheme(e.target.checked)}
-                    type="checkbox"
-                    defaultChecked={theme === "dark"}
-                    className="toggle toggle-sm"
-                  />
-                </label>
+                <p className="text-xs text-gray-500">{user?.email}</p>
               </li>
               <li>
                 <button
                   onClick={handleLogout}
-                  className="btn btn-error p-2 rounded-full text-sm hover:text-white"
+                  className="btn btn-error text-white text-sm rounded-full"
                 >
                   Logout
                 </button>
@@ -137,29 +142,58 @@ const Navbar = () => {
             </ul>
           </div>
         ) : (
-          <div className="flex items-center gap-2">
-            <label className="flex justify-center text-center items-center gap-3 font-primary text-sm h-10 border-gray-500 rounded-full p-2 border-2">
-              Change Theme
-              <input
-                onChange={(e) => handleTheme(e.target.checked)}
-                type="checkbox"
-                defaultChecked={theme === "dark"}
-                className="toggle toggle-xs text-gray-500 dark:text-white"
-              />
-            </label>
-            <Link
-              to="/login"
-              className="btn btn-outline btn-accent rounded-full font-primary border-2 text-lg"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="btn btn-outline btn-info rounded-full font-primary border-2 text-lg"
-            >
-              SignUp
-            </Link>
-          </div>
+          <>
+            {/* Desktop Buttons */}
+            <div className="hidden lg:flex items-center gap-2">
+              <Link
+                to="/login"
+                className="btn btn-outline btn-accent rounded-full font-primary border-2 text-sm"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="btn btn-info rounded-full font-primary border-2 text-sm text-white"
+              >
+                Sign Up
+              </Link>
+            </div>
+
+            {/* Mobile Dropdown */}
+            <div className="dropdown dropdown-end lg:hidden">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0"
+                  />
+                </svg>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-40 shadow space-y-2"
+              >
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/register">Sign Up</Link>
+                </li>
+              </ul>
+            </div>
+          </>
         )}
       </div>
     </div>
