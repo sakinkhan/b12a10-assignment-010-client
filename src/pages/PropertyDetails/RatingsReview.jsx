@@ -23,7 +23,9 @@ const RatingsReview = ({ propertyData }) => {
 
         // Filter reviews by propertyId
         const propertyReviews = data.filter(
-          (r) => r.propertyId === propertyData._id || r.propertyId.toString() === propertyData._id
+          (r) =>
+            r.propertyId === propertyData._id ||
+            r.propertyId.toString() === propertyData._id
         );
         setReviewsList(propertyReviews);
       } catch (err) {
@@ -43,7 +45,11 @@ const RatingsReview = ({ propertyData }) => {
         title: "Rating Required",
         text: "Please select a star rating before submitting.",
         icon: "warning",
-        confirmButtonColor: "#108251",
+        customClass: {
+          confirmButton:
+            "btn btn-success bg-[#108251] hover:bg-success text-white font-semibold rounded-full px-6 py-2 font-primary mb-2",
+        },
+        buttonsStyling: false,
       });
       return;
     }
@@ -53,7 +59,11 @@ const RatingsReview = ({ propertyData }) => {
         title: "Review Required",
         text: "Please write a short review before submitting.",
         icon: "warning",
-        confirmButtonColor: "#108251",
+        customClass: {
+          confirmButton:
+            "btn btn-success bg-[#108251] hover:bg-success text-white font-semibold rounded-full px-6 py-2 font-primary mb-2",
+        },
+        buttonsStyling: false,
       });
       return;
     }
@@ -93,7 +103,11 @@ const RatingsReview = ({ propertyData }) => {
           title: "Review Submitted!",
           text: "Your review has been successfully added.",
           icon: "success",
-          confirmButtonColor: "#108251",
+          customClass: {
+            confirmButton:
+              "btn btn-success bg-[#108251] hover:bg-success text-white font-semibold rounded-full px-6 py-2 font-primary mb-2",
+          },
+          buttonsStyling: false,
         });
       }
     } catch (err) {
