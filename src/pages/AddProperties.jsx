@@ -39,9 +39,8 @@ const AddProperties = () => {
       userName: user?.displayName || "Anonymous",
       postedDate: new Date().toISOString(),
     };
-    console.log(newProperty);
 
-    fetch("http://localhost:3000/properties", {
+    fetch("b12a10-homenest-api-server.vercel.app/properties", {
       method: "POST",
       headers: {
         "content-type": "application/json",

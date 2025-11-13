@@ -23,14 +23,14 @@ const AllProperties = () => {
   // ✅ Filter by Property Name (case-insensitive)
   const filteredProperties = sortedProperties.filter((property) =>
     property.propertyName
-      .toLowerCase()
+      ?.toLowerCase()
       .includes(searchQuery.toLowerCase().trim())
   );
 
   return (
     <div>
       <title>HomeNest - All Properties</title>
-      <section className="py-12 bg-linear-to-tl from-green-100 via-green-50 to-green-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-700 text-base-content dark:text-gray-200 transition-colors duration-300 px-15">
+      <section className="py-12 bg-linear-to-tl from-green-100 via-green-50 to-green-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-700 text-base-content dark:text-gray-200 transition-colors duration-300 px-15 min-h-screen">
         <div className="container mx-auto px-4">
           {/* Header + Controls */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">

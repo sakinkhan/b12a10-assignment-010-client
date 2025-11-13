@@ -17,14 +17,13 @@ const PropertyDetails = () => {
     try {
       const { _id, ...dataWithoutId } = updatedData;
 
-      const res = await fetch(`http://localhost:3000/properties/${_id}`, {
+      const res = await fetch(`b12a10-homenest-api-server.vercel.app/properties/${_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataWithoutId),
       });
 
       const result = await res.json();
-      console.log(result);
 
       if (result.modifiedCount > 0) {
         setProperty(updatedData);
@@ -80,7 +79,7 @@ const PropertyDetails = () => {
 
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:3000/properties/${id}`, {
+      const res = await fetch(`b12a10-homenest-api-server.vercel.app/properties/${id}`, {
         method: "DELETE",
       });
 

@@ -12,13 +12,12 @@ const MyRatings = () => {
     const fetchMyReviews = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/allReviews?email=${user.email}`
+          `b12a10-homenest-api-server.vercel.app/allReviews?email=${user.email}`
         );
         const data = await res.json();
         const sorted = data.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
-        console.log(sorted);
         setMyReviews(sorted);
       } catch (err) {
         console.error(err);

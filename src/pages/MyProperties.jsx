@@ -23,7 +23,7 @@ const MyProperties = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:3000/properties?userEmail=${user.email}`
+          `b12a10-homenest-api-server.vercel.app/properties?userEmail=${user.email}`
         );
         const data = await res.json();
         setProperties(data);
@@ -59,7 +59,7 @@ const MyProperties = () => {
 
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:3000/properties/${id}`, {
+      const res = await fetch(`b12a10-homenest-api-server.vercel.app/properties/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -91,7 +91,7 @@ const MyProperties = () => {
     setIsUpdating(true);
     try {
       const { _id, ...dataWithoutId } = updatedProperty; // remove _id
-      const res = await fetch(`http://localhost:3000/properties/${_id}`, {
+      const res = await fetch(`b12a10-homenest-api-server.vercel.app/properties/${_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataWithoutId),

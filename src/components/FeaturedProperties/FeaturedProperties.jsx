@@ -18,7 +18,7 @@ const FeaturedProperties = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/properties/featured")
+    fetch("b12a10-homenest-api-server.vercel.app/properties/featured")
       .then((res) => res.json())
       .then((data) => setProperties(data))
       .catch((err) => console.error(err))

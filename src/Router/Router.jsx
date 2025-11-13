@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/allProperties",
-        loader: () => fetch("http://localhost:3000/properties"),
+        loader: () => fetch("b12a10-homenest-api-server.vercel.app/properties"),
         element: <AllProperties></AllProperties>,
         hydrateFallbackElement: <Loading></Loading>,
       },
@@ -45,7 +45,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/properties/${params.id}`),
+          fetch(
+            `b12a10-homenest-api-server.vercel.app/properties/${params.id}`
+          ),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
