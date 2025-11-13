@@ -40,7 +40,7 @@ const AddProperties = () => {
       postedDate: new Date().toISOString(),
     };
 
-    fetch("b12a10-homenest-api-server.vercel.app/properties", {
+    fetch("https://b12a10-homenest-api-server.vercel.app/properties", {
       method: "POST",
       headers: {
         "content-type": "application/json",

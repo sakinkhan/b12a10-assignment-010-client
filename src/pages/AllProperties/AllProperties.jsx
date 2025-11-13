@@ -9,7 +9,6 @@ const AllProperties = () => {
   const [sortOption, setSortOption] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // ✅ Sort the properties
   const sortedProperties = [...properties].sort((a, b) => {
     if (sortOption === "priceLowHigh") return a.price - b.price;
     if (sortOption === "priceHighLow") return b.price - a.price;
@@ -19,8 +18,6 @@ const AllProperties = () => {
       return new Date(a.postedDate) - new Date(b.postedDate);
     return 0;
   });
-
-  // ✅ Filter by Property Name (case-insensitive)
   const filteredProperties = sortedProperties.filter((property) =>
     property.propertyName
       ?.toLowerCase()

@@ -23,7 +23,7 @@ const MyProperties = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `b12a10-homenest-api-server.vercel.app/properties?userEmail=${user.email}`
+          `https://b12a10-homenest-api-server.vercel.app/properties?userEmail=${user.email}`
         );
         const data = await res.json();
         setProperties(data);
@@ -59,9 +59,12 @@ const MyProperties = () => {
 
     setLoading(true);
     try {
-      const res = await fetch(`b12a10-homenest-api-server.vercel.app/properties/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://b12a10-homenest-api-server.vercel.app/properties/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await res.json();
       if (data.deletedCount > 0) {
         Swal.fire({
@@ -91,11 +94,14 @@ const MyProperties = () => {
     setIsUpdating(true);
     try {
       const { _id, ...dataWithoutId } = updatedProperty; // remove _id
-      const res = await fetch(`b12a10-homenest-api-server.vercel.app/properties/${_id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dataWithoutId),
-      });
+      const res = await fetch(
+        `https://b12a10-homenest-api-server.vercel.app/properties/${_id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dataWithoutId),
+        }
+      );
 
       const data = await res.json();
       if (data.modifiedCount > 0) {
@@ -139,7 +145,7 @@ const MyProperties = () => {
       </h1>
 
       {properties.length === 0 ? (
-        <p className="text-center text-gray-500 dark:text-gray-400 font-secondary">
+        <p className="text-left text-gray-500 dark:text-gray-400 font-secondary">
           You haven't added any properties yet.
         </p>
       ) : (

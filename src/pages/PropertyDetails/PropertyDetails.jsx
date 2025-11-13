@@ -17,11 +17,14 @@ const PropertyDetails = () => {
     try {
       const { _id, ...dataWithoutId } = updatedData;
 
-      const res = await fetch(`b12a10-homenest-api-server.vercel.app/properties/${_id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dataWithoutId),
-      });
+      const res = await fetch(
+        `https://b12a10-homenest-api-server.vercel.app/properties/${_id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dataWithoutId),
+        }
+      );
 
       const result = await res.json();
 
@@ -79,9 +82,12 @@ const PropertyDetails = () => {
 
     setLoading(true);
     try {
-      const res = await fetch(`b12a10-homenest-api-server.vercel.app/properties/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://b12a10-homenest-api-server.vercel.app/properties/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       const result = await res.json();
 

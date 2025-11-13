@@ -12,7 +12,7 @@ const MyRatings = () => {
     const fetchMyReviews = async () => {
       try {
         const res = await fetch(
-          `b12a10-homenest-api-server.vercel.app/allReviews?email=${user.email}`
+          `https://b12a10-homenest-api-server.vercel.app/allReviews?email=${user.email}`
         );
         const data = await res.json();
         const sorted = data.sort(

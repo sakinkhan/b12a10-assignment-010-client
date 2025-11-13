@@ -17,7 +17,7 @@ const RatingsReview = ({ propertyData }) => {
     const fetchReviews = async () => {
       try {
         const res = await fetch(
-          `b12a10-homenest-api-server.vercel.app/allReviews?propertyId=${propertyData._id}`
+          `https://b12a10-homenest-api-server.vercel.app/allReviews?propertyId=${propertyData._id}`
         );
         const data = await res.json();
         setReviewsList(data);
@@ -63,11 +63,14 @@ const RatingsReview = ({ propertyData }) => {
     };
 
     try {
-      const res = await fetch("b12a10-homenest-api-server.vercel.app/reviews", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newReview),
-      });
+      const res = await fetch(
+        "https://b12a10-homenest-api-server.vercel.app/reviews",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newReview),
+        }
+      );
       const data = await res.json();
 
       if (data.insertedId) {
