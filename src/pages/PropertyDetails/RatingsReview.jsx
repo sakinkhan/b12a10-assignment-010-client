@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import StarRating from "./StarRating";
 import { AuthContext } from "../../provider/AuthProvider";
@@ -10,17 +10,22 @@ const RatingsReview = ({ propertyData }) => {
   const [review, setReview] = useState("");
   const [reviewsList, setReviewsList] = useState([]);
 
-  // ✅ Fetch all reviews for this property on mount
+  // Fetch reviews for this property
   useEffect(() => {
     if (!propertyData?._id) return;
 
     const fetchReviews = async () => {
       try {
         const res = await fetch(
-          `https://b12a10-homenest-api-server.vercel.app/allReviews?propertyId=${propertyData._id}`
+          "https://b12a10-homenest-api-server.vercel.app/allReviews"
         );
         const data = await res.json();
-        setReviewsList(data);
+
+        // Filter reviews by propertyId
+        const propertyReviews = data.filter(
+          (r) => r.propertyId === propertyData._id || r.propertyId.toString() === propertyData._id
+        );
+        setReviewsList(propertyReviews);
       } catch (err) {
         console.error("Error fetching reviews:", err);
       }
@@ -29,9 +34,10 @@ const RatingsReview = ({ propertyData }) => {
     fetchReviews();
   }, [propertyData?._id]);
 
-  // ✅ Submit handler (same as before)
+  // Submit a new review
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
+
     if (rating === 0) {
       Swal.fire({
         title: "Rating Required",
@@ -60,6 +66,7 @@ const RatingsReview = ({ propertyData }) => {
       propertyId: propertyData._id,
       propertyName: propertyData.propertyName,
       propertyImage: propertyData.propertyImage,
+      createdAt: new Date().toISOString(),
     };
 
     try {
@@ -71,12 +78,13 @@ const RatingsReview = ({ propertyData }) => {
           body: JSON.stringify(newReview),
         }
       );
+
       const data = await res.json();
 
       if (data.insertedId) {
         setReviewsList((prev) => [
           ...prev,
-          { ...newReview, _id: data.insertedId, createdAt: new Date() },
+          { ...newReview, _id: data.insertedId },
         ]);
         setRating(0);
         setReview("");
@@ -85,12 +93,7 @@ const RatingsReview = ({ propertyData }) => {
           title: "Review Submitted!",
           text: "Your review has been successfully added.",
           icon: "success",
-          confirmButtonText: "Okay",
-          customClass: {
-            confirmButton:
-              "btn btn-success bg-[#108251] hover:bg-success text-white font-semibold rounded-full px-6 py-2 font-primary mb-2",
-          },
-          buttonsStyling: false,
+          confirmButtonColor: "#108251",
         });
       }
     } catch (err) {
@@ -115,11 +118,10 @@ const RatingsReview = ({ propertyData }) => {
           </div>
 
           <textarea
-            type="text"
             value={review}
             onChange={(e) => setReview(e.target.value)}
             placeholder="Write a short review..."
-            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#108251] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-seconary"
+            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#108251] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-secondary"
           />
 
           <button
