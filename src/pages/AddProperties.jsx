@@ -1,5 +1,6 @@
 import React, { useState, use } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const AddProperties = () => {
   const { user } = use(AuthContext);
@@ -18,28 +19,28 @@ const AddProperties = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value, type } = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "number" ? Number(value) : value,
+      [name]: value,
     });
   };
 
   const handleAddProperty = (e) => {
     e.preventDefault();
-
     const newProperty = {
       ...formData,
       price: Number(formData.price),
       beds: Number(formData.beds),
       baths: Number(formData.baths),
       area: Number(formData.area),
+      propertyImage: formData.image,
       userEmail: user?.email || "unknown",
       userName: user?.displayName || "Anonymous",
       postedDate: new Date().toISOString(),
     };
+    console.log(newProperty);
 
-    console.log("Property Added:", newProperty);
     fetch("http://localhost:3000/properties", {
       method: "POST",
       headers: {
@@ -49,29 +50,53 @@ const AddProperties = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Property Added!",
+            text: "Your property has been successfully added to the listings.",
+            icon: "success",
+            customClass: {
+              confirmButton:
+                "btn btn-success bg-[#108251] hover:bg-success text-white font-semibold rounded-full px-6 py-2 font-primary mb-2",
+            },
+            buttonsStyling: false,
+          });
+
+          // Reset form
+          setFormData({
+            propertyName: "",
+            description: "",
+            category: "",
+            price: "",
+            location: "",
+            image: "",
+            beds: "",
+            baths: "",
+            area: "",
+            tag: "",
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong. Please try again.",
+            icon: "error",
+            confirmButtonColor: "#d33",
+          });
+        }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to add property. Please try again later.",
+          icon: "error",
+          confirmButtonColor: "#d33",
+        });
       });
-
-    // Reset form after submission
-    setFormData({
-      propertyName: "",
-      description: "",
-      category: "",
-      price: "",
-      location: "",
-      image: "",
-      beds: "",
-      baths: "",
-      area: "",
-      tag: "",
-    });
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center px-5 py-10 bg-green-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-all duration-300">
+    <div className="min-h-screen flex justify-center items-center px-5 py-10 bg-green-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-all duration-300">
       <div className="w-full max-w-2xl bg-white dark:bg-[#1e1e1e] rounded-2xl shadow-lg p-8 transition-all duration-300">
         <h2 className="text-4xl font-bold mb-8 text-center text-[#108251] dark:text-success font-primary">
           Add a New Property

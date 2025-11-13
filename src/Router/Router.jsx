@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/allProperties",
-        loader: () => fetch("http://localhost:3000/allProperties"),
+        loader: () => fetch("http://localhost:3000/properties"),
         element: <AllProperties></AllProperties>,
         hydrateFallbackElement: <Loading></Loading>,
       },

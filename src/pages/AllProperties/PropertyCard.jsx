@@ -88,11 +88,11 @@ const PropertyCard = ({
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium font-secondary">
               <div className="flex items-center">
                 <FaBed className="mr-2 text-gray-700 dark:text-gray-200" />{" "}
-                {beds} Bed
+                {beds} Beds
               </div>
               <div className="flex items-center">
                 <FaBath className="mr-2 text-gray-700 dark:text-gray-200" />{" "}
-                {baths} Bath
+                {baths} Baths
               </div>
               <div className="flex items-center">
                 <BiArea className="mr-2 text-gray-700 dark:text-gray-200" />{" "}
@@ -103,11 +103,11 @@ const PropertyCard = ({
         </div>
 
         {/* 3. Pricing & Button Section */}
-        <div className="p-6 md:col-span-2 lg:col-span-1 lg:p-8 flex flex-col justify-between items-center lg:items-end border-t md:border-t-0 lg:border-l border-base-200 bg-base-200">
+        <div className="p-6 md:col-span-2 lg:col-span-1 lg:p-8 flex flex-col flex-wrap justify-between items-center lg:items-end border-t md:border-t-0 lg:border-l border-base-200 bg-base-200">
           <div className="mb-6 text-2xl lg:text-3xl font-extrabold text-[#108251] dark:text-success font-secondary text-center w-full">
             {tag === "For Sale"
               ? `$${price.toLocaleString()}`
-              : `$${price}/Week`}
+              : `$${price} / Week`}
           </div>
           <Link
             to={`/propertyDetails/${_id}`}

@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaBed, FaBath, FaRulerCombined } from "react-icons/fa";
+import { AuthContext } from "../../provider/AuthProvider";
+import UpdatePropertyModal from "../UpdatePropertyModal";
 
-const PropertyDetailsCard = ({ propertyData }) => {
+const PropertyDetailsCard = ({ propertyData, onUpdate, onDelete, loading }) => {
+  const { user } = useContext(AuthContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [localProperty, setLocalProperty] = useState(propertyData);
+
+  useEffect(() => {
+    setLocalProperty(propertyData);
+  }, [propertyData]);
+
+  if (!localProperty) return null;
+
   const {
     propertyName,
     location,
@@ -18,23 +30,36 @@ const PropertyDetailsCard = ({ propertyData }) => {
     userEmail,
     userPhoto,
     postedDate,
-  } = propertyData;
+    _id,
+  } = localProperty;
 
   const formattedPrice =
     price >= 1000 ? `$${price.toLocaleString()}` : `$${price}`;
 
-  const formattedDate = new Date(postedDate).toLocaleDateString("en-AU", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  const formattedDate = postedDate
+    ? new Date(postedDate).toLocaleDateString("en-AU", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
+    : "";
+
+  const isOwner = user?.email === userEmail;
+
+  const handleUpdate = async (updatedData) => {
+    if (onUpdate) {
+      await onUpdate(updatedData);
+      setIsModalOpen(false);
+      setLocalProperty(updatedData);
+    }
+  };
 
   return (
     <div className="max-w-6xl mx-auto py-10 transition-colors duration-300 bg-green-50 dark:bg-gray-900">
       {/* HEADER */}
       <div className="flex flex-col md:flex-row justify-between items-start mb-6">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 font-primary mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 font-primary">
             {propertyName}
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 flex items-center font-secondary">
@@ -46,10 +71,8 @@ const PropertyDetailsCard = ({ propertyData }) => {
           </p>
         </div>
         <div className="text-right mt-4 md:mt-0">
-          <p className="text-3xl md:text-4xl font-bold text-[#108251] dark:text-green-400">
-            {tag === "For Sale"
-              ? `${formattedPrice.toLocaleString()}`
-              : `${formattedPrice} / Week`}
+          <p className="text-3xl md:text-4xl font-bold text-[#108251] dark:text-green-400 font-secondary">
+            {tag === "For Sale" ? formattedPrice : `${formattedPrice} / Week`}
           </p>
           <span className="inline-block mt-3 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 font-semibold px-4 py-2 rounded-full">
             {category}
@@ -81,18 +104,14 @@ const PropertyDetailsCard = ({ propertyData }) => {
             {beds} Beds
           </span>
         </div>
-
         <div className="w-px bg-gray-300 dark:bg-gray-700 mx-4" />
-
         <div className="flex flex-col items-center flex-1">
           <FaBath className="text-gray-500 dark:text-gray-400 text-xl mb-1" />
           <span className="font-semibold text-gray-800 dark:text-gray-200">
             {baths} Baths
           </span>
         </div>
-
         <div className="w-px bg-gray-300 dark:bg-gray-700 mx-4" />
-
         <div className="flex flex-col items-center flex-1">
           <FaRulerCombined className="text-gray-500 dark:text-gray-400 text-xl mb-1" />
           <span className="font-semibold text-gray-800 dark:text-gray-200">
@@ -100,8 +119,9 @@ const PropertyDetailsCard = ({ propertyData }) => {
           </span>
         </div>
       </div>
+
+      {/* DESCRIPTION & CONTACT */}
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* DESCRIPTION */}
         <div className="lg:w-2/3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-6 flex-1">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2 font-primary">
             Description
@@ -111,8 +131,7 @@ const PropertyDetailsCard = ({ propertyData }) => {
           </p>
         </div>
 
-        {/* CONTACT PostedBy */}
-        <div className="lg:w-1/3 h-fit bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-6 flex flex-col items-center  gap-5 transition-colors duration-300 font-secondary">
+        <div className="lg:w-1/3 h-fit bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md p-6 flex flex-col items-center gap-5 transition-colors duration-300 font-secondary">
           <img
             src={userPhoto}
             alt={userName}
@@ -125,13 +144,40 @@ const PropertyDetailsCard = ({ propertyData }) => {
             <p className="text-gray-500 dark:text-gray-400">{userEmail}</p>
             <a
               href={`mailto:${userEmail}`}
-              className="mt-2 inline-block bg-[#108251] hover:bg-success dark:bg-green-600 dark:hover:bg-green-500 text-white hover:text-black font-semibold px-4 py-2 rounded-full transition-colors duration-300 font-primary"
+              className="mt-2 inline-block bg-[#108251] dark:bg-green-600 text-white font-semibold px-4 py-2 rounded-full"
             >
               Contact Agent
             </a>
           </div>
+
+          {isOwner && (
+            <div className="flex gap-4 mt-4 w-full justify-center">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="btn btn-info text-white rounded-full px-6 py-2"
+                disabled={loading}
+              >
+                {loading ? "Updating..." : "Update"}
+              </button>
+              <button
+                onClick={() => onDelete(_id)}
+                className="btn btn-error text-white rounded-full px-6 py-2"
+                disabled={loading}
+              >
+                {loading ? "Deleting..." : "Delete"}
+              </button>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* UPDATE MODAL */}
+      <UpdatePropertyModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        propertyData={localProperty}
+        onUpdate={handleUpdate}
+      />
     </div>
   );
 };

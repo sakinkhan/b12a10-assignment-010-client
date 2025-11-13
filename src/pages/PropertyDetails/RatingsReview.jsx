@@ -1,28 +1,82 @@
-import React, { use, useState } from "react";
+import React, { useState, useContext } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import StarRating from "./StarRating";
 import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
-const RatingsReview = () => {
-  const { user } = use(AuthContext);
+const RatingsReview = ({ propertyData }) => {
+  const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const [reviewsList, setReviewsList] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleReviewSubmit = async (e) => {
     e.preventDefault();
-    if (!review.trim() || rating === 0) return;
+    if (rating === 0) {
+      Swal.fire({
+        title: "Rating Required",
+        text: "Please select a star rating before submitting.",
+        icon: "warning",
+        confirmButtonColor: "#108251",
+        confirmButtonText: "OK",
+        width: 400,
+        confirmButtonClass: "rounded-full px-12 py-2",
+      });
+      return;
+    }
+
+    if (!review.trim()) {
+      Swal.fire({
+        title: "Review Required",
+        text: "Please write a short review before submitting.",
+        icon: "warning",
+        confirmButtonColor: "#108251",
+        confirmButtonText: "OK",
+        width: 400,
+        confirmButtonClass: "rounded-full px-12 py-2",
+      });
+      return;
+    }
 
     const newReview = {
-      id: Date.now(),
-      name: user?.displayName || "Anonymous User", // use user from AuthContext
+      name: user?.displayName || "Anonymous User",
+      email: user?.email || "unknown",
       rating,
       review,
+      propertyId: propertyData._id,
+      propertyName: propertyData.propertyName,
+      propertyImage: propertyData.propertyImage,
     };
 
-    setReviewsList([newReview, ...reviewsList]);
-    setRating(0);
-    setReview("");
+    try {
+      const res = await fetch("http://localhost:3000/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newReview),
+      });
+      const data = await res.json();
+
+      if (data.insertedId) {
+        setReviewsList([
+          ...reviewsList,
+          { ...newReview, _id: data.insertedId, createdAt: new Date() },
+        ]);
+        setRating(0);
+        setReview("");
+
+        Swal.fire({
+          title: "Review Submitted!",
+          text: "Your review has been successfully added.",
+          icon: "success",
+          confirmButtonColor: "#108251",
+          confirmButtonText: "Great!",
+          width: 400,
+          confirmButtonClass: "rounded-full px-12 py-2",
+        });
+      }
+    } catch (err) {
+      console.error("Error saving review:", err);
+    }
   };
 
   return (
@@ -32,7 +86,7 @@ const RatingsReview = () => {
       </h2>
 
       {/* Review Form */}
-      <form onSubmit={handleSubmit} className="mb-8">
+      <form onSubmit={handleReviewSubmit} className="mb-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-gray-800 dark:text-gray-200 font-primary">
@@ -51,7 +105,7 @@ const RatingsReview = () => {
 
           <button
             type="submit"
-            className="btn bg-[#108251] hover:bg-success dark:bg-green-600 dark:hover:bg-green-500 text-white hover:text-black font-semibold px-5 py-2 rounded-full font-semibold text-sm transition-all duration-200 font-primary"
+            className="btn bg-[#108251] hover:bg-success dark:bg-green-600 dark:hover:bg-green-500 text-white hover:text-black font-semibold px-5 py-2 rounded-full text-sm transition-all duration-200 font-primary"
           >
             Submit
           </button>
@@ -63,11 +117,11 @@ const RatingsReview = () => {
         {reviewsList.length > 0 ? (
           reviewsList.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 flex gap-4 bg-white dark:bg-gray-900"
             >
-              {/* Render user photo if available */}
-              {item.name === user?.displayName && user?.photoURL ? (
+              {/* Reviewer Avatar */}
+              {item.email === user?.email && user?.photoURL ? (
                 <img
                   src={user.photoURL}
                   alt={user.displayName}
