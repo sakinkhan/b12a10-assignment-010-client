@@ -37,7 +37,7 @@ const SimpleSteps = () => {
   ];
 
   return (
-    <section className="py-20 bg-green-900 dark:bg-green-950 text-white px-15">
+    <section className="py-20 px-15 bg-linear-to-tl from-green-900 via-emerald-600 to-green-700 text-white dark:from-green-950 dark:via-emerald-900 dark:to-green-950">
       <h1 className="text-center text-5xl pb-15 font-bold font-primary">
         Simple Steps
       </h1>

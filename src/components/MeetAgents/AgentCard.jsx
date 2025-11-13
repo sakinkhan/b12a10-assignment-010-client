@@ -2,7 +2,7 @@ import React from "react";
 
 const AgentCard = ({ name, role, imageUrl, ringColor }) => {
   return (
-    <div className="flex flex-col items-center p-4 text-center bg-white dark:bg-gray-800 rounded-2xl shadow-md dark:shadow-gray-700 transition transform hover:scale-105 hover:shadow-lg duration-300 cursor-pointer">
+    <div className="flex flex-col items-center p-4 text-center bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700  transform hover:scale-105 cursor-pointer transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl rounded-xl">
       <div className="avatar relative mb-4">
         <div
           className={`w-32 h-32 rounded-full border-4 ${ringColor} border-opacity-50`}

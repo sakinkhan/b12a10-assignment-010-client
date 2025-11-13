@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import StarRating from "./StarRating";
 import { AuthContext } from "../../provider/AuthProvider";
@@ -10,6 +10,26 @@ const RatingsReview = ({ propertyData }) => {
   const [review, setReview] = useState("");
   const [reviewsList, setReviewsList] = useState([]);
 
+  // ✅ Fetch all reviews for this property on mount
+  useEffect(() => {
+    if (!propertyData?._id) return;
+
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:3000/allReviews?propertyId=${propertyData._id}`
+        );
+        const data = await res.json();
+        setReviewsList(data);
+      } catch (err) {
+        console.error("Error fetching reviews:", err);
+      }
+    };
+
+    fetchReviews();
+  }, [propertyData?._id]);
+
+  // ✅ Submit handler (same as before)
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     if (rating === 0) {
@@ -18,9 +38,6 @@ const RatingsReview = ({ propertyData }) => {
         text: "Please select a star rating before submitting.",
         icon: "warning",
         confirmButtonColor: "#108251",
-        confirmButtonText: "OK",
-        width: 400,
-        confirmButtonClass: "rounded-full px-12 py-2",
       });
       return;
     }
@@ -31,9 +48,6 @@ const RatingsReview = ({ propertyData }) => {
         text: "Please write a short review before submitting.",
         icon: "warning",
         confirmButtonColor: "#108251",
-        confirmButtonText: "OK",
-        width: 400,
-        confirmButtonClass: "rounded-full px-12 py-2",
       });
       return;
     }
@@ -57,8 +71,8 @@ const RatingsReview = ({ propertyData }) => {
       const data = await res.json();
 
       if (data.insertedId) {
-        setReviewsList([
-          ...reviewsList,
+        setReviewsList((prev) => [
+          ...prev,
           { ...newReview, _id: data.insertedId, createdAt: new Date() },
         ]);
         setRating(0);
@@ -68,10 +82,12 @@ const RatingsReview = ({ propertyData }) => {
           title: "Review Submitted!",
           text: "Your review has been successfully added.",
           icon: "success",
-          confirmButtonColor: "#108251",
-          confirmButtonText: "Great!",
-          width: 400,
-          confirmButtonClass: "rounded-full px-12 py-2",
+          confirmButtonText: "Okay",
+          customClass: {
+            confirmButton:
+              "btn btn-success bg-[#108251] hover:bg-success text-white font-semibold rounded-full px-6 py-2 font-primary mb-2",
+          },
+          buttonsStyling: false,
         });
       }
     } catch (err) {
@@ -95,12 +111,12 @@ const RatingsReview = ({ propertyData }) => {
             <StarRating value={rating} onChange={setRating} size={28} />
           </div>
 
-          <input
+          <textarea
             type="text"
             value={review}
             onChange={(e) => setReview(e.target.value)}
             placeholder="Write a short review..."
-            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#108251] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#108251] bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-seconary"
           />
 
           <button
@@ -140,6 +156,14 @@ const RatingsReview = ({ propertyData }) => {
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 text-sm mt-1 font-secondary">
                   {item.review}
+                </p>
+                <p className="text-gray-500 dark:text-gray-400 text-xs mt-1 font-primary">
+                  Reviewed on:{" "}
+                  {new Date(item.createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
                 </p>
               </div>
             </div>

@@ -29,7 +29,7 @@ const MyRatings = () => {
   }, [user?.email]);
 
   return (
-    <div className="mx-auto py-10 px-5 md:px-20 min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="mx-auto py-10 px-5 md:px-20 min-h-screen bg-linear-to-bl from-green-100 via-green-50 to-green-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-700 text-base-content dark:text-gray-200 transition-colors duration-300">
       <h1 className="text-3xl md:text-4xl font-bold text-[#108251] dark:text-green-400 mb-6 font-primary">
         My Ratings ({myReviews.length})
       </h1>

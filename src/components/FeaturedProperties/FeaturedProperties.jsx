@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -8,150 +8,27 @@ import { FaBed, FaBath } from "react-icons/fa";
 import { BiArea } from "react-icons/bi";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
-import "./FeaturedProperties.css";
 import { TbFileDescription } from "react-icons/tb";
+import Loading from "../Loading";
+import "./FeaturedProperties.css";
 import { Link } from "react-router";
 
 const FeaturedProperties = () => {
-  const properties = [
-    {
-      id: 1,
-      propertyName: "Maple Ridge Apartments",
-      location: "382 Blue Sky Boulevard, Oakwood Residences, CO 80202",
-      price: "$85,000",
-      beds: 5,
-      baths: 4,
-      area: "1600 Sqft",
-      image:
-        "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
-      tag: "For Sale",
-      category: "Apartment",
-      shortDescription:
-        "Spacious apartments with modern amenities in a prime location.",
-    },
-    {
-      id: 2,
-      propertyName: "Lakeside Manor",
-      location: "4345 Maplewood Drive, Evergreen Estates, CA 90210",
-      price: "$50,000",
-      beds: 3,
-      baths: 3,
-      area: "1200 Sqft",
-      image:
-        "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070&auto=format&fit=crop",
-      tag: "For Sale",
-      category: "House",
-      shortDescription:
-        "Charming lakeside home offering peaceful surroundings and comfort.",
-    },
-    {
-      id: 3,
-      propertyName: "Golden Meadows",
-      location: "4345 Maplewood Drive, Evergreen Estates, CA 90210",
-      price: "$50,000",
-      beds: 3,
-      baths: 3,
-      area: "1200 Sqft",
-      image:
-        "https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?q=80&w=2070&auto=format&fit=crop",
-      tag: "For Sale",
-      category: "Unit",
-      shortDescription:
-        "Elegant property surrounded by lush greenery and serene views.",
-    },
-    {
-      id: 4,
-      propertyName: "Villa In Oglesby Ave",
-      location: "1035 Oglesby Ave, Chicago, IL 60617",
-      price: "$130,000 /month",
-      beds: 4,
-      baths: 3,
-      area: "800 sq ft",
-      image:
-        "https://images.unsplash.com/photo-1605146768851-eda79da39897?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
-      tag: "For Rent",
-      category: "House",
-      shortDescription:
-        "Modern villa with stylish interiors and convenient city access.",
-    },
-    {
-      id: 5,
-      propertyName: "Modern Loft",
-      location: "42 Wallaby Way, Sydney, NSW 2000",
-      price: "$5,000 /month",
-      beds: 2,
-      baths: 2,
-      area: "900 sq ft",
-      image:
-        "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
-      tag: "For Rent",
-      category: "Apartment",
-      shortDescription:
-        "Contemporary loft with open spaces and city skyline views.",
-    },
-    {
-      id: 6,
-      propertyName: "Urban Retreat",
-      location: "55 King Street, Melbourne, VIC 3000",
-      price: "$8,000 /month",
-      beds: 3,
-      baths: 2,
-      area: "1100 sq ft",
-      image:
-        "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
-      tag: "For Rent",
-      category: "Unit",
-      shortDescription:
-        "Cozy urban home located near cafes, parks, and transport.",
-    },
-    {
-      id: 7,
-      propertyName: "Sunset Villas",
-      location: "12 Palm Drive, Gold Coast, QLD 4217",
-      price: "$50,000 /month",
-      beds: 4,
-      baths: 3,
-      area: "1300 sq ft",
-      image:
-        "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
-      tag: "For Rent",
-      category: "House",
-      shortDescription:
-        "Stylish villa with spacious interiors and sunset views.",
-    },
-    {
-      id: 8,
-      propertyName: "Cozy Cottage",
-      location: "99 Willow Lane, Hobart, TAS 7000",
-      price: "$7,000 /month",
-      beds: 2,
-      baths: 1,
-      area: "700 sq ft",
-      image:
-        "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
-      tag: "For Rent",
-      category: "Land",
-      shortDescription:
-        "Charming cottage perfect for small families or couples.",
-    },
-    {
-      id: 9,
-      propertyName: "Seaside Escape",
-      location: "88 Ocean Drive, Byron Bay, NSW 2481",
-      price: "$1,000 /month",
-      beds: 5,
-      baths: 4,
-      area: "2000 sq ft",
-      image:
-        "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vZGVybiUyMGhvdXNlfGVufDB8fDB8fHwy&auto=format&fit=crop&q=60&w=500",
-      tag: "For Rent",
-      category: "Apartment",
-      shortDescription: "Luxury beachfront property with stunning ocean views.",
-    },
-  ];
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/properties/featured")
+      .then((res) => res.json())
+      .then((data) => setProperties(data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <Loading />;
 
   return (
-    <section className="py-20 transition-colors duration-300 bg-green-50 dark:bg-gray-900 px-5 md:px-20">
+    <section className="py-20 bg-linear-to-tl from-green-100 via-green-50 to-green-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-700 text-base-content dark:text-gray-200 transition-colors duration-300 px-5 md:px-20">
       <div className="mx-auto">
         {/* Heading & Button */}
         <div className="flex flex-col md:flex-row gap-5 justify-between items-center text-center md:text-left mb-12">
@@ -190,72 +67,104 @@ const FeaturedProperties = () => {
             }}
             className="w-full"
           >
-            {properties.map((p) => (
-              <SwiperSlide key={p.id}>
-                <div className="group bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 transition-shadow duration-300 hover:shadow-xl w-full h-full lg:h-[600px] flex flex-col justify-between grow">
-                  {/* Image */}
-                  <div className="relative h-64 w-full shrink-0">
-                    <img
-                      src={p.image}
-                      alt={p.propertyName}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-3 left-3 bg-[#108251] text-white text-xs font-bold px-3 py-1 rounded-full">
-                      {p.tag}
-                    </div>
-                  </div>
+            {properties.map((p) => {
+              const isTruncated = p.description.length > 50;
+              const shortDescription = isTruncated
+                ? p.description.slice(0, 50)
+                : p.description;
 
-                  {/* Card Content */}
-                  <div className="p-4 flex flex-col flex-1 justify-between">
-                    {/* Features */}
-                    <div className="flex justify-around items-center pb-4 border-b border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 mb-4">
-                      <div className="flex items-center text-sm font-medium">
-                        <FaBed className="mr-2 text-base text-gray-700 dark:text-gray-200" />
-                        {p.beds} Bed
-                      </div>
-                      <div className="flex items-center text-sm font-medium">
-                        <FaBath className="mr-2 text-base text-gray-700 dark:text-gray-200" />
-                        {p.baths} Bath
-                      </div>
-                      <div className="flex items-center text-sm font-medium">
-                        <BiArea className="mr-2 text-base text-gray-700 dark:text-gray-200" />
-                        {p.area}
+              return (
+                <SwiperSlide key={p.id}>
+                  <div className="group bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 transition-shadow duration-300 hover:shadow-xl w-full h-full lg:h-[600px] flex flex-col justify-between grow">
+                    {/* Image */}
+                    <div className="relative h-64 w-full shrink-0">
+                      <img
+                        src={p.image}
+                        alt={p.propertyName}
+                        className="w-full h-full object-cover"
+                      />
+                      <div
+                        className={`badge absolute top-4 right-4 text-white text-xs font-bold p-2 border-0 rounded-full ${
+                          p.tag === "For Sale" ? "bg-[#108251]" : "bg-info"
+                        }`}
+                      >
+                        {p.tag}
                       </div>
                     </div>
 
-                    {/* Title, Address, Price, Button */}
-                    <div className="flex flex-col flex-1 justify-between">
-                      <div>
-                        <h3 className="text-2xl font-bold mb-1 text-gray-900 dark:text-gray-100 font-primary">
-                          {p.propertyName}
-                        </h3>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 flex items-start">
-                          <IoLocationSharp className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />
-                          {p.location}
-                        </p>
-                        <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 flex items-start">
-                          <TbFileDescription className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />
-                          {p.shortDescription}
-                        </p>
-                      </div>
-                      <div>
-                        <div className="flex items-center justify-between">
-                          <p className="text-[#108251] dark:text-[#60e0a9] text-2xl font-bold mb-4 font-secondary">
-                            {p.price}
-                          </p>
-                          <p className="mb-4 font-secondary btn btn-outline btn-success rounded-full h-7 cursor-default">
-                            {p.category}
-                          </p>
+                    {/* Card Content */}
+                    <div className="p-4 flex flex-col flex-1 justify-between">
+                      {/* Features */}
+                      <div className="flex justify-around items-center pb-4 border-b border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 mb-4">
+                        <div className="flex items-center text-sm font-medium">
+                          <FaBed className="mr-2 text-base text-gray-700 dark:text-gray-200" />
+                          {p.beds} Bed
                         </div>
-                        <button className="bg-gray-900 rounded-full dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-semibold px-6 py-2 transition duration-300 hover:bg-[#108251] dark:hover:bg-[#108251] dark:hover:text-white cursor-pointer w-full">
-                          View Details
-                        </button>
+                        <span>|</span>
+                        <div className="flex items-center text-sm font-medium">
+                          <FaBath className="mr-2 text-base text-gray-700 dark:text-gray-200" />
+                          {p.baths} Bath
+                        </div>
+                        <span>|</span>
+                        <div className="flex items-center text-sm font-medium">
+                          <BiArea className="mr-2 text-base text-gray-700 dark:text-gray-200" />
+                          {p.area} m²
+                        </div>
+                      </div>
+
+                      {/* Title, Address, Price, Description */}
+                      <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                          <h3 className="text-2xl font-bold mb-1 text-gray-900 dark:text-gray-100 font-primary">
+                            {p.propertyName}
+                          </h3>
+                          <p className="text-gray-500 dark:text-gray-400 text-sm mb-2 flex items-start">
+                            <IoLocationSharp className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />
+                            {p.location}
+                          </p>
+                          {/* Truncated Description with inline "Read More" */}
+                          <div className="text-sm text-base-content/80 mb-3 font-secondary flex items-start">
+                            <TbFileDescription className="mt-1 mr-1 text-base text-gray-400 dark:text-gray-300" />
+                            {isTruncated ? (
+                              <p>
+                                {shortDescription}
+                                <span>... </span>
+                                <Link
+                                  to={`/propertyDetails/${p._id}`}
+                                  className="text-[#108251] hover:underline hover:text-success font-semibold text-xs"
+                                >
+                                  Read More
+                                </Link>
+                              </p>
+                            ) : (
+                              p.description
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="flex items-center justify-between">
+                            <div className="text-[#108251] dark:text-[#60e0a9] text-2xl font-bold mb-4 font-secondary">
+                              {p.tag === "For Sale"
+                                ? `$${p.price.toLocaleString()}`
+                                : `$${p.price} / Week`}
+                            </div>
+                            <p className="mb-4 font-secondary btn btn-outline btn-success rounded-full h-7 cursor-default">
+                              {p.category}
+                            </p>
+                          </div>
+                          <Link
+                            to={`/propertyDetails/${p._id}`}
+                            className="bg-gray-900 rounded-full dark:bg-gray-100 text-white dark:text-gray-900 text-sm font-semibold px-6 py-2 transition duration-300 hover:bg-[#108251] dark:hover:bg-[#108251] dark:hover:text-white cursor-pointer btn w-full"
+                          >
+                            See Details
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
 
           {/* Next Arrow */}

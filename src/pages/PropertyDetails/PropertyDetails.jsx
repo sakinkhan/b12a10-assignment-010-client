@@ -27,7 +27,7 @@ const PropertyDetails = () => {
       console.log(result);
 
       if (result.modifiedCount > 0) {
-        setProperty(updatedData); 
+        setProperty(updatedData);
         Swal.fire({
           title: "Property Updated!",
           text: "Your property has been successfully updated.",
@@ -120,7 +120,7 @@ const PropertyDetails = () => {
     }
   };
 
-  if (!property) return null; 
+  if (!property) return null;
 
   return (
     <div className="bg-green-50 dark:bg-gray-900 py-10">

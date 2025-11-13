@@ -133,7 +133,7 @@ const MyProperties = () => {
   }
 
   return (
-    <div className="p-8 bg-gray-100 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <div className="p-8 min-h-screen bg-linear-to-bl from-green-100 via-green-50 to-green-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-700 text-base-content dark:text-gray-200 transition-colors duration-300 ">
       <h1 className="text-3xl md:text-4xl font-bold text-[#108251] dark:text-green-400 mb-6  font-primary">
         My Properties ({properties.length})
       </h1>
@@ -147,7 +147,7 @@ const MyProperties = () => {
           {properties.map((property) => (
             <div
               key={property._id}
-              className="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700 rounded-xl p-5 hover:shadow-lg transition duration-300 relative flex flex-col justify-between hover:scale-102"
+              className="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700 rounded-xl p-5 hover:shadow-lg transition duration-300 relative flex flex-col justify-between hover:scale-105"
             >
               <figure className="relative w-full h-56 sm:h-64 md:h-full overflow-hidden lg:col-span-1">
                 <img
@@ -172,9 +172,19 @@ const MyProperties = () => {
                     {property.category}
                   </p>
                 </div>
+                {/* Location */}
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-1 font-secondary flex items-center">
                   <IoLocationSharp className="text-gray-600 dark:text-gray-300 mr-1" />
                   {property.location}
+                </p>
+                {/* PostedBy Date */}
+                <p className="text-gray-500 dark:text-gray-400 text-sm mb-1 font-secondary">
+                  <span className="font-primary font-semibold">Posted on:</span>{" "}
+                  {new Date(property.postedDate).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
                 </p>
                 <div className="text-gray-500 dark:text-gray-400 text-sm font-secondary flex items-center gap-5">
                   <div className="flex items-center">
@@ -192,6 +202,7 @@ const MyProperties = () => {
                     {property.area} m²
                   </div>
                 </div>
+
                 <p className="text-[#108251] dark:text-success font-semibold mb-2 font-secondary mt-3">
                   {property.tag === "For Sale"
                     ? `$${property.price.toLocaleString()}`

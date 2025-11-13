@@ -17,6 +17,7 @@ const PropertyCard = ({
   category,
   userName,
   description,
+  postedDate,
 }) => {
   // Truncate description to 120 characters
   const truncateDescription = (text, limit) => {
@@ -32,11 +33,11 @@ const PropertyCard = ({
       {/* Outer Grid for Responsiveness */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
         {/* 1. Image Section */}
-        <figure className="relative w-full h-56 sm:h-64 md:h-full overflow-hidden lg:col-span-1">
+        <figure className="relative w-full h-56 sm:h-64 md:h-full overflow-hidden lg:col-span-1 p-2">
           <img
             src={propertyImage}
             alt={propertyName}
-            className="object-cover w-full h-70"
+            className="object-cover w-full h-70 rounded-lg"
           />
           <div
             className={`badge absolute top-4 right-4 text-white text-xs font-bold p-2 border-0 rounded-full ${
@@ -75,8 +76,16 @@ const PropertyCard = ({
             </p>
 
             {/* Posted By */}
-            <p className="text-sm text-base-content/80 mb-3 flex items-start font-secondary">
+            <p className="text-sm text-base-content/80 flex items-start font-secondary">
               <span className="font-semibold mr-1">Posted By:</span> {userName}
+            </p>
+            <p className="text-sm text-base-content/80 mb-5 flex items-start font-secondary">
+              <span className="font-semibold mr-1">Posted Date:</span>{" "}
+              {new Date(postedDate).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
             </p>
           </div>
 

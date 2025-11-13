@@ -5,7 +5,7 @@ const MeetAgents = () => {
   const agentsData = [
     {
       id: 1,
-      name: "Alexander Kaminski",
+      name: "Alex Bolton",
       role: "Property Manager",
       imageUrl:
         "https://images.unsplash.com/photo-1584999734482-0361aecad844?ixlib=rb-4.1.0&auto=format&fit=crop&q=60&w=500",
@@ -13,7 +13,7 @@ const MeetAgents = () => {
     },
     {
       id: 2,
-      name: "Edwin Martins",
+      name: "Edwina Martins",
       role: "Property Advisor",
       imageUrl:
         "https://images.unsplash.com/photo-1712174766230-cb7304feaafe?ixlib=rb-4.1.0&auto=format&fit=crop&q=60&w=500",
@@ -21,7 +21,7 @@ const MeetAgents = () => {
     },
     {
       id: 3,
-      name: "Wade Warren",
+      name: "Wade Xin",
       role: "Property Manager",
       imageUrl:
         "https://images.unsplash.com/photo-1604904612715-47bf9d9bc670?ixlib=rb-4.1.0&auto=format&fit=crop&q=60&w=500",
@@ -29,7 +29,7 @@ const MeetAgents = () => {
     },
     {
       id: 4,
-      name: "John Carter",
+      name: "Sophie Moore",
       role: "Property Consultant",
       imageUrl:
         "https://media.istockphoto.com/id/938709362/photo/portrait-of-a-girl.webp?a=1&b=1&s=612x612&w=0&k=20&c=WNAd2QlsKBev4QdNoX7aumAZ--5uC7zJFAGKkSSOltQ=",
@@ -37,7 +37,7 @@ const MeetAgents = () => {
     },
     {
       id: 5,
-      name: "Sophie Moore",
+      name: "John Carter ",
       role: "Property Consultant",
       imageUrl:
         "https://images.unsplash.com/photo-1691335053993-c9ba8cfd65e7?ixlib=rb-4.1.0&auto=format&fit=crop&q=60&w=500",
@@ -54,12 +54,15 @@ const MeetAgents = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-green-50 dark:bg-gray-900 text-base-content dark:text-gray-200 transition-colors duration-300 px-4 sm:px-20">
+    <section
+      className="py-16 sm:py-24 bg-linear-to-t from-green-100 via-green-50 to-green-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900
+ text-base-content dark:text-gray-200 transition-colors duration-300 px-4 sm:px-20"
+    >
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-8">
           <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 flex flex-col sm:flex-row justify-center items-center font-primary">
             <span>Meet Our&nbsp;</span>
-            <span className="relative inline-block text-[#108251]">Agents</span>
+            <span className="text-[#108251]">Agents</span>
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto font-secondary">
             Discover the Faces Behind Exceptional Service, Expertise, and
@@ -72,7 +75,7 @@ const MeetAgents = () => {
           ))}
         </div>
         <div className="text-center">
-          <button className="rounded-full text-[16px] font-semibold text-white px-4 py-2 btn bg-[#108251] transition duration-300 hover:text-white hover:bg-green-500 font-primary">
+          <button className="rounded-full text-[16px] font-semibold text-white px-8 py-3 bg-gradient-to-r from-[#108251] to-green-500 hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-md hover:shadow-lg font-primary">
             Browse More Agents
           </button>
         </div>
