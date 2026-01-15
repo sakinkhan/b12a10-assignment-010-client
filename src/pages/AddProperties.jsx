@@ -78,7 +78,7 @@ const AddProperties = () => {
           });
 
           // redirect
-          navigate("/myProperties");
+          navigate("/dashboard/my-properties");
         } else {
           Swal.fire({
             title: "Error!",

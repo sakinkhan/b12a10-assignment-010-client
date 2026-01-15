@@ -50,8 +50,8 @@ const Profile = () => {
       </h1>
 
       <div className="w-full bg-base-100 rounded-xl shadow-xl border border-[#108251] p-6 md:p-8 flex flex-col md:flex-row gap-8">
-        {/* Left: Avatar and basic info (readable) */}
-        <div className="flex flex-col items-center md:items-start md:w-1/3 space-y-4">
+        {/* Left: Avatar and basic info */}
+        <div className="flex flex-col items-center justify-center md:w-1/3 space-y-4 ">
           <div className="avatar">
             <div className="w-28 rounded-full ring ring-[#22c55e] ring-offset-base-100 ring-offset-2">
               <img
@@ -64,11 +64,14 @@ const Profile = () => {
               />
             </div>
           </div>
-          <div>
+
+          <div className="text-center">
             <p className="text-lg font-semibold font-primary">
               {user?.displayName || "User"}
             </p>
-            <p className="text-sm text-gray-500 font-secondary">{user?.email}</p>
+            <p className="text-sm text-gray-500 font-secondary">
+              {user?.email}
+            </p>
           </div>
         </div>
 
@@ -124,9 +127,7 @@ const Profile = () => {
               <p className="text-sm text-red-500 font-secondary">{error}</p>
             )}
             {success && (
-              <p className="text-sm text-green-600 font-secondary">
-                {success}
-              </p>
+              <p className="text-sm text-green-600 font-secondary">{success}</p>
             )}
 
             <button
@@ -144,4 +145,3 @@ const Profile = () => {
 };
 
 export default Profile;
-

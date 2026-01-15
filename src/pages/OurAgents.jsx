@@ -74,7 +74,7 @@ const OurAgents = () => {
       name: "John Carter",
       role: "Property Consultant",
       imageUrl:
-        "https://images.unsplash.com/photo-1691335053993-c9ba8cfd65e7?ixlib=rb-4.1.0&auto=format&fit=crop&q=60&w=500",
+        "https://img.freepik.com/premium-photo/happy-man-ai-generated-portrait-user-profile_1119669-1.jpg",
       ringColor: "border-cyan-600",
       email: "john.carter@homenest.com",
       phone: "+1 (555) 567-8901",
@@ -176,7 +176,9 @@ const OurAgents = () => {
           {agentsData.map((agent) => (
             <div
               key={agent.id}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden 
+             hover:shadow-xl transition-shadow duration-300 cursor-pointer 
+             group flex flex-col h-full"
               onClick={() =>
                 setSelectedAgent(selectedAgent?.id === agent.id ? null : agent)
               }
@@ -199,13 +201,16 @@ const OurAgents = () => {
               </div>
 
               {/* Content Section */}
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 font-primary">
-                  {agent.name}
-                </h3>
-                <p className="text-[#108251] dark:text-green-400 font-semibold mb-4 font-secondary">
-                  {agent.role}
-                </p>
+              <div className="p-6 flex flex-col flex-1">
+                {/* Header */}
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 font-primary">
+                    {agent.name}
+                  </h3>
+                  <p className="text-[#108251] dark:text-green-400 font-semibold mb-4 font-secondary">
+                    {agent.role}
+                  </p>
+                </div>
 
                 {/* Quick Info */}
                 <div className="space-y-2 mb-4 text-sm">
@@ -223,7 +228,7 @@ const OurAgents = () => {
                   </div>
                 </div>
 
-                {/* Stats Row */}
+                {/* Stats */}
                 <div className="grid grid-cols-3 gap-3 py-4 border-y border-gray-200 dark:border-gray-700 mb-4 text-center text-sm">
                   <div>
                     <p className="font-bold text-[#108251] dark:text-green-400">
@@ -251,23 +256,18 @@ const OurAgents = () => {
                   </div>
                 </div>
 
-                {/* Specialization */}
-                <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-3 uppercase tracking-wider">
-                  Specialization
-                </p>
-                <p className="text-sm font-semibold text-white px-3 py-1 rounded-full bg-[#108251] dark:bg-green-600 inline-block">
-                  {agent.specialization}
+                {/* Bio */}
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                  {agent.bio}
                 </p>
 
-                {/* Expandable Bio */}
-                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                    {agent.bio}
-                  </p>
-                  <button className="w-full bg-[#108251] hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
-                    Contact Agent
-                  </button>
-                </div>
+                {/* CTA — pinned to bottom */}
+                <button
+                  className="mt-auto w-full bg-[#108251] hover:bg-green-600 text-white 
+                 font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
+                >
+                  Contact Agent
+                </button>
               </div>
             </div>
           ))}

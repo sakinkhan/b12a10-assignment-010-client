@@ -74,7 +74,7 @@ const MeetAgents = () => {
       name: "John Carter",
       role: "Property Consultant",
       imageUrl:
-        "https://images.unsplash.com/photo-1691335053993-c9ba8cfd65e7?ixlib=rb-4.1.0&auto=format&fit=crop&q=60&w=500",
+        "https://img.freepik.com/premium-photo/happy-man-ai-generated-portrait-user-profile_1119669-1.jpg",
       ringColor: "border-cyan-600",
       email: "john.carter@homenest.com",
       phone: "+1 (555) 567-8901",
