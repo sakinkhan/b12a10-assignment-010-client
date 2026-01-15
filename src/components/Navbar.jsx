@@ -31,6 +31,7 @@ const Navbar = () => {
     <>
       <MyLink to="/">Home</MyLink>
       <MyLink to="/allProperties">All Properties</MyLink>
+      <MyLink to="/our-agents">Our Agents</MyLink>
     </>
   );
 

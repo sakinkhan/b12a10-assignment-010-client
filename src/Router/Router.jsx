@@ -14,6 +14,7 @@ import PrivateRoute from "../provider/PrivateRoute";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/DashboardHome/DashboardHome";
+import OurAgents from "../pages/OurAgents";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
             `https://b12a10-homenest-api-server.vercel.app/properties/${params.id}`
           ),
         hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: "/our-agents",
+        element: <OurAgents></OurAgents>,
       },
     ],
   },
