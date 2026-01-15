@@ -141,8 +141,8 @@ const Login = () => {
                     : "hover:scale-[1.02]"
                 } ${
                   document.documentElement.classList.contains("dark")
-                    ? "bg-[#4ade80] text-black hover:bg-[#22c55e]"
-                    : "bg-[#108251] text-white hover:bg-green-600"
+                    ? "bg-[#4ade80] text-black hover:bg-[#22c55e] rounded-full"
+                    : "bg-[#108251] text-white hover:bg-green-600 rounded-full"
                 }`}
               >
                 {loading ? "Logging in..." : "Login"}
@@ -163,7 +163,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={handleGoogleSignIn}
-                  className="btn w-full flex items-center justify-center gap-2 bg-white text-black border-gray-300 hover:bg-gray-100 dark:bg-[#2a2a2a] dark:text-gray-100 dark:border-gray-700 dark:hover:bg-[#3a3a3a]"
+                  className="btn w-full flex items-center justify-center gap-2 bg-white text-black border-gray-300 hover:bg-gray-100 dark:bg-[#2a2a2a] dark:text-gray-100 dark:border-gray-700 dark:hover:bg-[#3a3a3a] rounded-full"
                 >
                   <svg
                     aria-label="Google logo"

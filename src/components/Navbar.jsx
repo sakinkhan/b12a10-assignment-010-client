@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import MyLink from "./MyLink";
 import logoImg from "../assets/logo.png";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 import { BsSunFill, BsMoonStarsFill } from "react-icons/bs";
@@ -9,6 +9,7 @@ import { BsSunFill, BsMoonStarsFill } from "react-icons/bs";
 const Navbar = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const { user, logOut } = useContext(AuthContext);
+  const location = useLocation();
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -33,13 +34,7 @@ const Navbar = () => {
     </>
   );
 
-  const protectedLinks = user && (
-    <>
-      <MyLink to="/addProperties">Add Properties</MyLink>
-      <MyLink to="/myProperties">My Properties</MyLink>
-      <MyLink to="/myRatings">My Ratings</MyLink>
-    </>
-  );
+  const protectedLinks = null;
 
   return (
     <div className="navbar bg-base-100 shadow-lg py-4 pr-4 md:px-20 sticky top-0 z-50">
@@ -125,16 +120,33 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-48 p-2 shadow font-primary space-y-2"
             >
-              <li>
-                <p className="font-semibold text-sm">{user?.displayName}</p>
+              <li className="pointer-events-none justify-center">
+                <span className="w-full text-center block font-semibold text-sm">
+                  {user?.displayName}
+                </span>
               </li>
+              {!location.pathname.startsWith("/dashboard") && (
+                <li>
+                  <Link
+                    to="/dashboard/profile"
+                    className="btn btn-sm rounded-full text-sm bg-[#108251] hover:bg-[#48e9a8] text-white hover:text-black"
+                  >
+                    Manage Profile
+                  </Link>
+                </li>
+              )}
               <li>
-                <p className="text-xs text-gray-500">{user?.email}</p>
+                <Link
+                  to="/dashboard"
+                  className="btn btn-outline btn-sm border-[#22c55e] text-[#22c55e] rounded-full font-primary border-2 text-sm w-full justify-center"
+                >
+                  My Dashboard
+                </Link>
               </li>
               <li>
                 <button
                   onClick={handleLogout}
-                  className="btn btn-error text-white text-sm rounded-full"
+                  className="btn btn-error btn-sm text-white text-sm rounded-full"
                 >
                   Logout
                 </button>
@@ -147,7 +159,7 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center gap-2">
               <Link
                 to="/login"
-                className="btn btn-outline btn-accent rounded-full font-primary border-2 text-sm"
+                className="btn btn-outline border-[#22c55e] text-[#22c55e] rounded-full font-primary border-2 text-sm"
               >
                 Login
               </Link>

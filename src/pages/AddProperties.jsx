@@ -1,9 +1,11 @@
 import React, { useState, use } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const AddProperties = () => {
   const { user } = use(AuthContext);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     propertyName: "",
@@ -74,6 +76,9 @@ const AddProperties = () => {
             area: "",
             tag: "",
           });
+
+          // redirect
+          navigate("/myProperties");
         } else {
           Swal.fire({
             title: "Error!",
@@ -97,7 +102,7 @@ const AddProperties = () => {
   return (
     <div className="min-h-screen flex justify-center items-center px-5 py-10 bg-linear-to-br from-green-100 via-green-50 to-green-300 dark:from-gray-900 dark:via-gray-950 dark:to-gray-700 text-base-content dark:text-gray-200 transition-colors duration-300">
       <div className="w-full max-w-2xl bg-white dark:bg-[#1e1e1e] rounded-2xl shadow-lg p-8 transition-all duration-300">
-        <h2 className="text-4xl font-bold mb-8 text-center text-[#108251] dark:text-success font-primary">
+        <h2 className="text-2xl font-bold mb-8 text-center text-[#108251] dark:text-success font-primary">
           Add a New Property
         </h2>
 

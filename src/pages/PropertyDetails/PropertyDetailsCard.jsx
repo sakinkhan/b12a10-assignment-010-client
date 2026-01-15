@@ -70,11 +70,12 @@ const PropertyDetailsCard = ({ propertyData, onUpdate, onDelete, loading }) => {
             Posted on {formattedDate}
           </p>
         </div>
-        <div className="text-right mt-4 md:mt-0">
-          <p className="text-3xl md:text-4xl font-bold text-[#108251] dark:text-green-400 font-secondary">
+        <div className="mt-4 md:mt-0 text-left md:text-right">
+          <p className="text-2xl md:text-4xl font-bold text-[#108251] dark:text-green-400 font-secondary">
             {tag === "For Sale" ? formattedPrice : `${formattedPrice} / Week`}
           </p>
-          <span className="inline-block mt-3 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 font-semibold px-4 py-2 rounded-full">
+
+          <span className="inline-block mt-2 md:mt-3 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 font-semibold px-4 py-1.5 rounded-full">
             {category}
           </span>
         </div>
@@ -88,7 +89,7 @@ const PropertyDetailsCard = ({ propertyData, onUpdate, onDelete, loading }) => {
           className="w-full h-100 md:h-150 lg:h-200 object-cover hover:scale-[1.01] transition-transform duration-500"
         />
         <div
-          className={`badge absolute top-4 right-4 text-white text-lg font-bold p-5 border-0 rounded-full ${
+          className={`badge badge-md md:badge-xl absolute top-4 right-4 text-white font-bold border-0 rounded-full ${
             tag === "For Sale" ? "bg-[#108251]" : "bg-info"
           }`}
         >

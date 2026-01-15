@@ -7,10 +7,13 @@ import AllProperties from "../pages/AllProperties/AllProperties";
 import AddProperties from "../pages/AddProperties";
 import MyProperties from "../pages/MyProperties";
 import MyRatings from "../pages/MyRatings";
+import Profile from "../pages/Profile";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "../provider/PrivateRoute";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
+import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardHome from "../pages/DashboardHome/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -51,29 +54,35 @@ const router = createBrowserRouter([
           ),
         hydrateFallbackElement: <Loading></Loading>,
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
       {
-        path: "/addProperties",
-        element: (
-          <PrivateRoute>
-            <AddProperties></AddProperties>
-          </PrivateRoute>
-        ),
+        index: true,
+        element: <DashboardHome></DashboardHome>,
       },
       {
-        path: "/myProperties",
-        element: (
-          <PrivateRoute>
-            <MyProperties></MyProperties>
-          </PrivateRoute>
-        ),
+        path: "profile",
+        element: <Profile></Profile>,
       },
       {
-        path: "/myRatings",
-        element: (
-          <PrivateRoute>
-            <MyRatings></MyRatings>
-          </PrivateRoute>
-        ),
+        path: "add-property",
+        element: <AddProperties></AddProperties>,
+      },
+      {
+        path: "my-properties",
+        element: <MyProperties></MyProperties>,
+      },
+      {
+        path: "my-ratings",
+        element: <MyRatings></MyRatings>,
       },
     ],
   },

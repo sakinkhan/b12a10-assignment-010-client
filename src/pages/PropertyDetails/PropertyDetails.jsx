@@ -132,7 +132,7 @@ const PropertyDetails = () => {
       <title>HomeNest - Property Details</title>
 
       {/* BACK BUTTON */}
-      <div className="pl-20 pt-5 pb-10">
+      <div className="px-5 md:px-20">
         <button
           onClick={() => navigate(-1)}
           className="btn btn-success rounded-full font-primary"
@@ -142,7 +142,7 @@ const PropertyDetails = () => {
         </button>
       </div>
 
-      <div className="px-20">
+      <div className="px-5 md:px-20">
         {/* PROPERTY DETAILS */}
         <PropertyDetailsCard
           propertyData={property}
